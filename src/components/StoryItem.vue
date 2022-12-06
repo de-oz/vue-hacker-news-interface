@@ -6,7 +6,12 @@ const props = defineProps({
 
 <template>
   <li>
-    <h3>{{ props.story.value?.title }}</h3>
+    <h3>
+      <RouterLink
+        :to="{ name: 'story', params: { id: props.story.value?.id || 0 } }">
+        {{ props.story.value?.title }}
+      </RouterLink>
+    </h3>
     <p>
       Author: {{ props.story.value?.by }} | Comments:
       {{ props.story.value?.descendants }} | Time:
