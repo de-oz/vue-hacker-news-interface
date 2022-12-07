@@ -1,12 +1,13 @@
 <template>
   <button @click="refresh">Refresh</button>
 
-  <ul>
+  <ul v-if="response">
     <StoryItem
       v-for="story of response"
       :story="story"
       :key="story.id" />
   </ul>
+  <h2 v-else>LOADING...</h2>
 </template>
 
 <script setup>
