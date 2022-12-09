@@ -14,6 +14,7 @@ const router = createRouter({
       path: '/:id',
       name: 'story',
       component: StoryView,
+      props: (route) => ({ id: Number(route.params.id) }),
     },
   ],
 });
