@@ -12,7 +12,8 @@ defineProps({
       </RouterLink>
     </h3>
     <p>
-      Author: {{ story.value.by }} | Comments: {{ story.descendants }} | Time:
+      Author: {{ story.value.by }} | Comments: {{ story.value.descendants }} |
+      Time:
       {{ new Date(story.value.time).toLocaleTimeString() }}
     </p>
   </li>
