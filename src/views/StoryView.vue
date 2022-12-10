@@ -1,4 +1,10 @@
 <template>
+  <button
+    @click="() => router.push({ name: 'main' })"
+    type="button">
+    Back to Main Page
+  </button>
+
   <template v-if="item">
     <div>
       <h2>
@@ -31,10 +37,13 @@
 <script setup>
 import useGetStory from '../composables/useGetStory.js';
 import CommentItem from '../components/CommentItem.vue';
+import { useRouter } from 'vue-router';
 
 const props = defineProps({
   id: { type: Number, required: true },
 });
+
+const router = useRouter();
 
 const item = useGetStory(props.id);
 </script>
