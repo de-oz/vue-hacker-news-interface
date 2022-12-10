@@ -5,7 +5,7 @@ export default function useGetNews(ref, n) {
   (async () => {
     try {
       let { data } = await axios.get(
-        `https://hacker-news.firebaseio.com/v0/newstories.json`
+        `https://hacker-news.firebaseio.com/v0/topstories.json`
       );
 
       data = await Promise.all(data.slice(0, n).map(useGetStory));

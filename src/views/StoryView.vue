@@ -19,12 +19,20 @@
     </div>
 
     <h3>Comments: {{ item.descendants }}</h3>
+
+    <ul>
+      <CommentItem
+        v-for="commentId of item.kids"
+        :key="commentId"
+        :comment="commentId" />
+    </ul>
   </template>
   <h3 v-else>LOADING...</h3>
 </template>
 
 <script setup>
 import useGetStory from '../composables/useGetStory.js';
+import CommentItem from '../components/CommentItem.vue';
 
 const props = defineProps({
   id: { type: Number, required: true },
