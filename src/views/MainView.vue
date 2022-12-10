@@ -16,15 +16,19 @@ import StoryItem from '../components/StoryItem.vue';
 import { ref, onBeforeMount, onBeforeUnmount } from 'vue';
 
 const listLength = 3;
-
 const response = ref(null);
+let intervalId;
 
-const intervalId = setInterval(() => useGetNews(response, listLength), 30000);
-
-onBeforeMount(() => useGetNews(response, listLength));
+onBeforeMount(() => setData());
 onBeforeUnmount(() => clearInterval(intervalId));
 
-function refresh() {
+function setData() {
   useGetNews(response, listLength);
+  intervalId = setInterval(() => useGetNews(response, listLength), 10000);
+}
+
+function refresh() {
+  clearInterval(intervalId);
+  setData();
 }
 </script>

@@ -1,6 +1,5 @@
 <template>
   <h2>Story Page</h2>
-  <p>Story ID: {{ id }}</p>
 
   <template v-if="item">
     <div>
