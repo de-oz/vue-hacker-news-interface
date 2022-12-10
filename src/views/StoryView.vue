@@ -1,6 +1,4 @@
 <template>
-  <h2>Story Page</h2>
-
   <template v-if="item">
     <div>
       <h2>

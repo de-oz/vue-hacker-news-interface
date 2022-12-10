@@ -15,7 +15,7 @@ import useGetNews from '../composables/useGetNews.js';
 import StoryItem from '../components/StoryItem.vue';
 import { ref, onBeforeMount, onBeforeUnmount } from 'vue';
 
-const listLength = 3;
+const listLength = 5;
 const response = ref(null);
 let intervalId;
 

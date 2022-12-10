@@ -1,8 +1,19 @@
 <template>
-  <h2>This is a comment</h2>
-  <p
-    v-if="comment"
-    v-html="comment.text"></p>
+  <li v-if="comment?.by">
+    <h4>
+      by {{ comment.by }}; posted:
+      {{ new Date(comment.time * 1000).toLocaleString() }}
+    </h4>
+
+    <p v-html="comment.text"></p>
+
+    <ul v-if="comment.kids">
+      <CommentItem
+        v-for="commentId of comment.kids"
+        :key="commentId"
+        :comment="commentId" />
+    </ul>
+  </li>
 </template>
 
 <script setup>
