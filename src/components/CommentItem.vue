@@ -1,5 +1,5 @@
 <template>
-  <li v-if="comment?.by">
+  <li v-if="comment">
     <h4>
       by {{ comment.by }}; posted:
       {{ new Date(comment.time * 1000).toLocaleString() }}
@@ -11,7 +11,7 @@
       <CommentItem
         v-for="commentId of comment.kids"
         :key="commentId"
-        :comment="commentId" />
+        :commentId="commentId" />
     </ul>
   </li>
 </template>
@@ -20,8 +20,8 @@
 import useGetStory from '../composables/useGetStory.js';
 
 const props = defineProps({
-  comment: Number,
+  commentId: Number,
 });
 
-const comment = useGetStory(props.comment);
+const comment = useGetStory(props.commentId);
 </script>

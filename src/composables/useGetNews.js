@@ -8,7 +8,7 @@ export default function useGetNews(ref, n) {
         `https://hacker-news.firebaseio.com/v0/topstories.json`
       );
 
-      data = await Promise.all(data.slice(0, n).map(useGetStory));
+      data = data.slice(0, n).map(useGetStory);
 
       ref.value = data;
     } catch (error) {

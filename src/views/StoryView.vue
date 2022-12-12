@@ -5,30 +5,30 @@
     Back to Main Page
   </button>
 
-  <template v-if="item">
+  <template v-if="story">
     <div>
       <h2>
-        {{ item.title }}
+        {{ story.title }}
         <a
-          :href="item.url"
+          :href="story.url"
           target="_blank"
           rel="noreferrer">
-          {{ item.url }}
+          {{ story.url }}
         </a>
       </h2>
       <div>
-        Author: <span>{{ item.by }}</span>
+        Author: <span>{{ story.by }}</span>
       </div>
-      <div>Date: {{ new Date(item.time * 1000).toLocaleString() }}</div>
+      <div>Date: {{ new Date(story.time * 1000).toLocaleString() }}</div>
     </div>
 
-    <h3>Comments: {{ item.descendants }}</h3>
+    <h3>Comments: {{ story.descendants }}</h3>
 
     <ul>
       <CommentItem
-        v-for="commentId of item.kids"
+        v-for="commentId of story.kids"
         :key="commentId"
-        :comment="commentId" />
+        :commentId="commentId" />
     </ul>
   </template>
   <h3 v-else>LOADING...</h3>
@@ -39,11 +39,11 @@ import useGetStory from '../composables/useGetStory.js';
 import CommentItem from '../components/CommentItem.vue';
 import { useRouter } from 'vue-router';
 
+const router = useRouter();
+
 const props = defineProps({
   id: { type: Number, required: true },
 });
 
-const router = useRouter();
-
-const item = useGetStory(props.id);
+const story = useGetStory(props.id);
 </script>
