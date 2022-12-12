@@ -24,10 +24,12 @@
 
     <h3>Comments: {{ story.descendants }}</h3>
 
+    <button @click="refresh">Refresh</button>
+
     <ul>
       <CommentItem
         v-for="commentId of story.kids"
-        :key="commentId"
+        :key="commentId + story.descendants"
         :commentId="commentId" />
     </ul>
   </template>
@@ -38,6 +40,7 @@
 import useGetStory from '../composables/useGetStory.js';
 import CommentItem from '../components/CommentItem.vue';
 import { useRouter } from 'vue-router';
+import { ref } from 'vue';
 
 const router = useRouter();
 
@@ -45,5 +48,10 @@ const props = defineProps({
   id: { type: Number, required: true },
 });
 
-const story = useGetStory(props.id);
+const story = ref(null);
+useGetStory(story, props.id);
+
+function refresh() {
+  useGetStory(story, props.id);
+}
 </script>

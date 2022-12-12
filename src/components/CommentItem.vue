@@ -18,10 +18,12 @@
 
 <script setup>
 import useGetStory from '../composables/useGetStory.js';
+import { ref } from 'vue';
 
 const props = defineProps({
   commentId: Number,
 });
 
-const comment = useGetStory(props.commentId);
+const comment = ref(null);
+useGetStory(comment, props.commentId);
 </script>
