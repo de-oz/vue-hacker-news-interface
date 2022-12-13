@@ -25,5 +25,5 @@ const props = defineProps({
 });
 
 const comment = ref(null);
-useGetStory(comment, props.commentId);
+await useGetStory(comment, props.commentId);
 </script>

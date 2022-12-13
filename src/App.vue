@@ -1,5 +1,3 @@
-<script setup></script>
-
 <template>
   <h1>Hacker News Interface</h1>
 

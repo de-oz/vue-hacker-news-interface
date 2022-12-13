@@ -1,23 +1,30 @@
 import axios from 'axios';
-import useGetStory from './useGetStory.js';
-import { ref } from 'vue';
 
-export default function useGetNews(news, n) {
-  (async () => {
-    try {
-      let { data } = await axios.get(
-        `https://hacker-news.firebaseio.com/v0/topstories.json`
-      );
+export default async function useGetNews(news, n, isLoading) {
+  try {
+    isLoading.value = true;
+    let { data } = await axios.get(
+      `https://hacker-news.firebaseio.com/v0/topstories.json`
+    );
 
-      data = data.slice(0, n).map((id) => {
-        const story = ref(null);
-        useGetStory(story, id);
-        return story;
-      });
+    data = await Promise.all(
+      data.slice(0, n).map(async (id) => {
+        try {
+          const { data } = await axios.get(
+            `https://hacker-news.firebaseio.com/v0/item/${id}.json`
+          );
 
-      news.value = data;
-    } catch (error) {
-      console.log('Failed to get a news list: ', error);
-    }
-  })();
+          return data;
+        } catch (error) {
+          console.log('Failed to get a story: ', error);
+        }
+      })
+    );
+
+    news.value = data;
+    isLoading.value = false;
+  } catch (error) {
+    isLoading.value = false;
+    console.log('Failed to get a news list: ', error);
+  }
 }
