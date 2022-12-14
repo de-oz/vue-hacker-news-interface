@@ -9,7 +9,7 @@ const story = toRef(props, 'story');
 </script>
 
 <template>
-  <li v-if="story">
+  <li v-if="story && !story.deleted && !story.dead">
     <h3>
       <RouterLink :to="{ name: 'story', params: { id: story.id } }">
         {{ story.title }}
@@ -20,5 +20,4 @@ const story = toRef(props, 'story');
       {{ new Date(story.time).toLocaleTimeString() }}
     </p>
   </li>
-  <h3 v-else>LOADING...</h3>
 </template>
