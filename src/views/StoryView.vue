@@ -48,6 +48,7 @@ import useGetStory from '../composables/useGetStory.js';
 import CommentItem from '../components/CommentItem.vue';
 import { useRouter } from 'vue-router';
 import { ref } from 'vue';
+import { state } from '../stores/newsStore.js';
 
 const router = useRouter();
 
@@ -56,7 +57,12 @@ const props = defineProps({
 });
 
 const story = ref(null);
-useGetStory(story, props.id);
+
+if (state.news) {
+  story.value = state.news.find((item) => item.id === props.id);
+} else {
+  useGetStory(story, props.id);
+}
 
 function refresh() {
   useGetStory(story, props.id);

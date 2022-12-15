@@ -11,26 +11,18 @@
 </template>
 
 <script setup>
-import useGetNews from '../composables/useGetNews.js';
 import StoryItem from '../components/StoryItem.vue';
-import { ref, onBeforeUnmount } from 'vue';
+import { toRef, onBeforeUnmount } from 'vue';
+import { state } from '../stores/newsStore.js';
 
-const news = ref(null);
+const news = toRef(state, 'news');
 
-const listLength = 5;
-let intervalId;
+state.update();
 
-setData();
-
-onBeforeUnmount(() => clearInterval(intervalId));
-
-function setData() {
-  useGetNews(news, listLength);
-  intervalId = setInterval(() => useGetNews(news, listLength), 30000);
-}
+onBeforeUnmount(() => clearInterval(state.intervalId));
 
 function refresh() {
-  clearInterval(intervalId);
-  setData();
+  clearInterval(state.intervalId);
+  state.update();
 }
 </script>
