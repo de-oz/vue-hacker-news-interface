@@ -1,8 +1,9 @@
 import axios from 'axios';
 
-export default async function useGetNews(news, n, isLoading) {
+export default async function useGetNews(news, n) {
   try {
-    isLoading.value = true;
+    news.value = null;
+
     let { data } = await axios.get(
       `https://hacker-news.firebaseio.com/v0/topstories.json`
     );
@@ -22,9 +23,7 @@ export default async function useGetNews(news, n, isLoading) {
     );
 
     news.value = data;
-    isLoading.value = false;
   } catch (error) {
-    isLoading.value = false;
     console.log('Failed to get a news list: ', error);
   }
 }

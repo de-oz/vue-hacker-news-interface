@@ -1,7 +1,7 @@
 <template>
   <button @click="refresh">Refresh</button>
 
-  <ul v-if="!isLoading">
+  <ul v-if="news">
     <StoryItem
       v-for="story of news"
       :story="story"
@@ -16,7 +16,6 @@ import StoryItem from '../components/StoryItem.vue';
 import { ref, onBeforeUnmount } from 'vue';
 
 const news = ref(null);
-const isLoading = ref(false);
 
 const listLength = 5;
 let intervalId;
@@ -26,11 +25,8 @@ setData();
 onBeforeUnmount(() => clearInterval(intervalId));
 
 function setData() {
-  useGetNews(news, listLength, isLoading);
-  intervalId = setInterval(
-    () => useGetNews(news, listLength, isLoading),
-    30000
-  );
+  useGetNews(news, listLength);
+  intervalId = setInterval(() => useGetNews(news, listLength), 30000);
 }
 
 function refresh() {
