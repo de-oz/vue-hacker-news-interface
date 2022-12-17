@@ -26,13 +26,12 @@
 
     <button @click="refresh">Refresh</button>
 
-    <Suspense :timeout="0">
+    <Suspense timeout="0">
       <ul :key="story.descendants">
         <CommentItem
           v-for="commentId of story.kids"
           :key="commentId"
-          :commentId="commentId"
-          :is-expanded="false" />
+          :commentId="commentId" />
       </ul>
 
       <template #fallback>
@@ -40,6 +39,7 @@
       </template>
     </Suspense>
   </template>
+
   <h1 v-else>LOADING...</h1>
 </template>
 
