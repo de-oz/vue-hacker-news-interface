@@ -12,17 +12,20 @@
 
 <script setup>
 import StoryItem from '../components/StoryItem.vue';
-import { toRef, onBeforeUnmount } from 'vue';
-import { state } from '../stores/newsStore.js';
+import { onBeforeUnmount } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useNewsStore } from '../stores/useNewsStore.js';
 
-const news = toRef(state, 'news');
+const store = useNewsStore();
+const { news, intervalId } = storeToRefs(store);
+const { updateNews } = store;
 
-state.update();
+updateNews();
 
-onBeforeUnmount(() => clearInterval(state.intervalId));
+onBeforeUnmount(() => clearInterval(intervalId.value));
 
 function refresh() {
-  clearInterval(state.intervalId);
-  state.update();
+  clearInterval(intervalId.value);
+  updateNews();
 }
 </script>

@@ -1,13 +1,3 @@
-<script setup>
-import { toRef } from 'vue';
-
-const props = defineProps({
-  story: Object,
-});
-
-const story = toRef(props, 'story');
-</script>
-
 <template>
   <li v-if="story && !story.deleted && !story.dead">
     <h3>
@@ -21,3 +11,13 @@ const story = toRef(props, 'story');
     </p>
   </li>
 </template>
+
+<script setup>
+import { toRef } from 'vue';
+
+const props = defineProps({
+  story: Object,
+});
+
+const story = toRef(props, 'story');
+</script>

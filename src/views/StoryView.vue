@@ -44,22 +44,24 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import useGetStory from '../composables/useGetStory.js';
 import CommentItem from '../components/CommentItem.vue';
-import { useRouter } from 'vue-router';
-import { ref } from 'vue';
-import { state } from '../stores/newsStore.js';
-
-const router = useRouter();
+import { useNewsStore } from '../stores/useNewsStore.js';
 
 const props = defineProps({
   id: { type: Number, required: true },
 });
 
+const router = useRouter();
+
+const { news } = useNewsStore();
+
 const story = ref(null);
 
-if (state.news) {
-  story.value = state.news.find((item) => item.id === props.id);
+if (news) {
+  story.value = news.find((item) => item.id === props.id);
 } else {
   useGetStory(story, props.id);
 }
