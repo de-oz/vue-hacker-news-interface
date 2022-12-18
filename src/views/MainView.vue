@@ -11,9 +11,9 @@
 </template>
 
 <script setup>
-import StoryItem from '../components/StoryItem.vue';
-import { onBeforeUnmount } from 'vue';
+import { onUnmounted } from 'vue';
 import { storeToRefs } from 'pinia';
+import StoryItem from '../components/StoryItem.vue';
 import { useNewsStore } from '../stores/useNewsStore.js';
 
 const store = useNewsStore();
@@ -22,7 +22,7 @@ const { updateNews } = store;
 
 updateNews();
 
-onBeforeUnmount(() => clearInterval(intervalId.value));
+onUnmounted(() => clearInterval(intervalId.value));
 
 function refresh() {
   clearInterval(intervalId.value);

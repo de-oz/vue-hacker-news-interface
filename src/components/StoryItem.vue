@@ -1,5 +1,5 @@
 <template>
-  <li v-if="story && !story.deleted && !story.dead">
+  <li v-if="isValid">
     <h3>
       <RouterLink :to="{ name: 'story', params: { id: story.id } }">
         {{ story.title }}
@@ -13,11 +13,13 @@
 </template>
 
 <script setup>
-import { toRef } from 'vue';
+import { computed, toRef } from 'vue';
 
 const props = defineProps({
   story: Object,
 });
 
 const story = toRef(props, 'story');
+
+const isValid = computed(() => !story.value.deleted && !story.value.dead);
 </script>

@@ -46,8 +46,8 @@
 <script setup>
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
-import useGetStory from '../composables/useGetStory.js';
 import CommentItem from '../components/CommentItem.vue';
+import { useGetStory } from '../composables/useGetStory.js';
 import { useNewsStore } from '../stores/useNewsStore.js';
 
 const props = defineProps({

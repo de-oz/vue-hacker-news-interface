@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
-import useGetNews from '../composables/useGetNews';
+import { useGetNews } from '../composables/useGetNews';
 
 export const useNewsStore = defineStore('news', () => {
   const news = ref(null);
@@ -8,7 +8,7 @@ export const useNewsStore = defineStore('news', () => {
 
   function updateNews() {
     useGetNews(news, 5);
-    intervalId.value = setInterval(() => useGetNews(news, 5), 10000);
+    intervalId.value = setInterval(() => useGetNews(news, 5), 30000);
   }
 
   return { news, intervalId, updateNews };

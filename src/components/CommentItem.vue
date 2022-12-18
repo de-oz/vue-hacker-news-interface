@@ -1,5 +1,5 @@
 <template>
-  <li v-if="comment && !comment.deleted && !comment.dead">
+  <li v-if="isValid">
     <h4>
       by {{ comment.by }}; posted:
       {{ new Date(comment.time * 1000).toLocaleString() }}
@@ -7,41 +7,42 @@
 
     <p v-html="comment.text"></p>
 
-    <button
-      v-if="comment.kids"
-      type="button"
-      @click="isExpanded = !isExpanded">
-      {{ isExpanded ? 'Collapse' : 'Expand' }}
-    </button>
+    <template v-if="comment.kids">
+      <button
+        type="button"
+        @click="isExpanded = !isExpanded">
+        {{ isExpanded ? 'Collapse' : 'Expand' }}
+      </button>
 
-    <ul v-if="comment.kids && isExpanded">
-      <Suspense
-        v-if="!expand"
-        timeout="0">
+      <ul v-if="isExpanded">
+        <Suspense
+          v-if="!expand"
+          timeout="0">
+          <CommentItem
+            v-for="commentId of comment.kids"
+            :key="commentId"
+            :commentId="commentId"
+            expand />
+
+          <template #fallback>
+            <h1>LOADING...</h1>
+          </template>
+        </Suspense>
+
         <CommentItem
+          v-else
           v-for="commentId of comment.kids"
           :key="commentId"
           :commentId="commentId"
           expand />
-
-        <template #fallback>
-          <h1>LOADING...</h1>
-        </template>
-      </Suspense>
-
-      <CommentItem
-        v-else
-        v-for="commentId of comment.kids"
-        :key="commentId"
-        :commentId="commentId"
-        expand />
-    </ul>
+      </ul>
+    </template>
   </li>
 </template>
 
 <script setup>
-import useGetStory from '../composables/useGetStory.js';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
+import { useGetStory } from '../composables/useGetStory.js';
 
 const props = defineProps({
   commentId: Number,
@@ -49,6 +50,9 @@ const props = defineProps({
 });
 
 const isExpanded = ref(props.expand);
+
 const comment = ref(null);
+const isValid = computed(() => !comment.value.deleted && !comment.value.dead);
+
 await useGetStory(comment, props.commentId);
 </script>

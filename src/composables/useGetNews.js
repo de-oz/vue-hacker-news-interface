@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export default async function useGetNews(news, n) {
+export async function useGetNews(news, n) {
   try {
     news.value = null;
 

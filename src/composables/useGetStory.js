@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export default async function useGetStory(story, id) {
+export async function useGetStory(story, id) {
   try {
     const { data } = await axios.get(
       `https://hacker-news.firebaseio.com/v0/item/${id}.json`
