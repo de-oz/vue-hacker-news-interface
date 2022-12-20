@@ -54,5 +54,5 @@ const isExpanded = ref(props.expand);
 const comment = ref(null);
 const isValid = computed(() => !comment.value.deleted && !comment.value.dead);
 
-await useGetStory(comment, props.commentId);
+await useGetStory(props.commentId, comment);
 </script>

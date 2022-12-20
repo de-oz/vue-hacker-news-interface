@@ -24,7 +24,7 @@
 
     <h3>Comments: {{ story.descendants }}</h3>
 
-    <button @click="refresh">Refresh</button>
+    <button @click="useGetStory(props.id, story)">Refresh</button>
 
     <Suspense timeout="0">
       <ul :key="story.descendants">
@@ -63,10 +63,6 @@ const story = ref(null);
 if (news) {
   story.value = news.find((item) => item.id === props.id);
 } else {
-  useGetStory(story, props.id);
-}
-
-function refresh() {
-  useGetStory(story, props.id);
+  useGetStory(props.id, story);
 }
 </script>
