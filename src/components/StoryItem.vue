@@ -1,15 +1,17 @@
 <template>
-  <li v-if="isValid">
-    <h3>
-      <RouterLink :to="{ name: 'story', params: { id: story.id } }">
+  <q-item
+    v-if="isValid"
+    :to="{ name: 'story', params: { id: story.id } }">
+    <q-item-section>
+      <q-item-label>
         {{ story.title }}
-      </RouterLink>
-    </h3>
-    <p>
-      Author: {{ story.by }} | Comments: {{ story.descendants }} | Time:
-      {{ new Date(story.time).toLocaleTimeString() }}
-    </p>
-  </li>
+      </q-item-label>
+      <q-item-label>
+        Author: {{ story.by }} | Comments: {{ story.descendants }} | Time:
+        {{ new Date(story.time).toLocaleTimeString() }}
+      </q-item-label>
+    </q-item-section>
+  </q-item>
 </template>
 
 <script setup>
