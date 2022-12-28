@@ -1,43 +1,56 @@
 <template>
-  <li v-if="isValid">
-    <h4>
-      by {{ comment.by }}; posted:
-      {{ new Date(comment.time * 1000).toLocaleString() }}
-    </h4>
+  <q-item
+    v-if="isValid"
+    tag="li">
+    <q-item-section>
+      <q-item-label>
+        by {{ comment.by }}; posted:
+        {{ new Date(comment.time * 1000).toLocaleString() }}
+      </q-item-label>
 
-    <p v-html="comment.text"></p>
+      <q-item-label v-html="comment.text" />
 
-    <template v-if="comment.kids">
-      <button
-        type="button"
-        @click="isExpanded = !isExpanded">
-        {{ isExpanded ? 'Collapse' : 'Expand' }}
-      </button>
+      <template v-if="comment.kids">
+        <q-item-label>
+          <q-btn
+            glossy
+            ripple
+            no-caps
+            dense
+            :icon="isExpanded ? 'expand_less' : 'expand_more'"
+            @click="isExpanded = !isExpanded">
+            {{ isExpanded ? 'Collapse' : 'Expand' }}
+          </q-btn>
+        </q-item-label>
 
-      <ul v-if="isExpanded">
-        <Suspense
-          v-if="!expand"
-          timeout="0">
+        <q-list
+          v-if="isExpanded"
+          tag="ul"
+          separator>
+          <Suspense
+            v-if="!expand"
+            timeout="0">
+            <CommentItem
+              v-for="commentId of comment.kids"
+              :key="commentId"
+              :commentId="commentId"
+              expand />
+
+            <template #fallback>
+              <h1>LOADING...</h1>
+            </template>
+          </Suspense>
+
           <CommentItem
+            v-else
             v-for="commentId of comment.kids"
             :key="commentId"
             :commentId="commentId"
             expand />
-
-          <template #fallback>
-            <h1>LOADING...</h1>
-          </template>
-        </Suspense>
-
-        <CommentItem
-          v-else
-          v-for="commentId of comment.kids"
-          :key="commentId"
-          :commentId="commentId"
-          expand />
-      </ul>
-    </template>
-  </li>
+        </q-list>
+      </template>
+    </q-item-section>
+  </q-item>
 </template>
 
 <script setup>

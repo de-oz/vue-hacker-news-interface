@@ -1,38 +1,56 @@
 <template>
-  <button
-    @click="() => router.push({ name: 'main' })"
-    type="button">
-    Back to Main Page
-  </button>
-
   <template v-if="story">
-    <div>
-      <h2>
+    <q-banner inline-actions>
+      <h1 class="text-h4">
         {{ story.title }}
-        <a
-          :href="story.url"
-          target="_blank"
-          rel="noreferrer">
-          {{ story.url }}
-        </a>
-      </h2>
+      </h1>
+      <a
+        :href="story.url"
+        target="_blank"
+        rel="noreferrer">
+        {{ story.url }}
+      </a>
       <div>
         Author: <span>{{ story.by }}</span>
       </div>
       <div>Date: {{ new Date(story.time * 1000).toLocaleString() }}</div>
-    </div>
 
-    <h3>Comments: {{ story.descendants }}</h3>
+      <template #action>
+        <q-btn
+          rounded
+          glossy
+          no-caps
+          icon="home"
+          label="Back to Main"
+          color="indigo-8"
+          :to="{ name: 'main' }" />
+      </template>
+    </q-banner>
 
-    <button @click="useGetStory(props.id, story)">Refresh</button>
+    <q-toolbar class="q-pl-md">
+      <q-toolbar-title shrink>
+        Comments: {{ story.descendants }}
+      </q-toolbar-title>
+
+      <q-btn
+        color="deep-orange-8"
+        glossy
+        no-caps
+        dense
+        icon="refresh"
+        @click="useGetStory(props.id, story)" />
+    </q-toolbar>
 
     <Suspense timeout="0">
-      <ul :key="story.descendants">
+      <q-list
+        tag="ul"
+        separator
+        :key="story.descendants">
         <CommentItem
           v-for="commentId of story.kids"
           :key="commentId"
           :commentId="commentId" />
-      </ul>
+      </q-list>
 
       <template #fallback>
         <h2>LOADING...</h2>
@@ -45,7 +63,6 @@
 
 <script setup>
 import { ref } from 'vue';
-import { useRouter } from 'vue-router';
 import CommentItem from '../components/CommentItem.vue';
 import { useGetStory } from '../composables/useGetStory.js';
 import { useNewsStore } from '../stores/useNewsStore.js';
@@ -53,8 +70,6 @@ import { useNewsStore } from '../stores/useNewsStore.js';
 const props = defineProps({
   id: { type: Number, required: true },
 });
-
-const router = useRouter();
 
 const { news } = useNewsStore();
 

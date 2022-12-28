@@ -20,7 +20,9 @@
     <q-btn
       class="q-mx-md"
       flat
+      no-caps
       icon="refresh"
+      label="Refresh"
       @click="refresh">
     </q-btn>
     <q-btn-dropdown
@@ -102,7 +104,7 @@ const store = useNewsStore();
 const { news, intervalId } = storeToRefs(store);
 const { updateNews } = store;
 
-const tab = ref('best');
+const tab = ref('top');
 const auto = ref(30);
 const items = ref(25);
 
