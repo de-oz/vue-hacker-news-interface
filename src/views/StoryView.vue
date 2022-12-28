@@ -38,7 +38,7 @@
         no-caps
         dense
         icon="refresh"
-        @click="useGetStory(props.id, story)" />
+        @click="refresh" />
     </q-toolbar>
 
     <Suspense timeout="0">
@@ -78,6 +78,10 @@ const story = ref(null);
 if (news) {
   story.value = news.find((item) => item.id === props.id);
 } else {
+  useGetStory(props.id, story);
+}
+
+function refresh() {
   useGetStory(props.id, story);
 }
 </script>
