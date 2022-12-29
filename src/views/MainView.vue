@@ -1,64 +1,27 @@
 <template>
-  <q-tabs
-    v-model="tab"
-    class="q-mb-md"
-    no-caps
-    inline-label>
-    <q-tab
-      icon="star"
-      name="best"
-      label="Best" />
-    <q-tab
-      name="new"
-      label="New"
-      icon="new_releases" />
-    <q-tab
-      name="top"
-      label="Top"
-      icon="highlight" />
-
-    <q-btn
-      class="q-mx-md"
-      flat
+  <div class="row justify-center q-my-sm">
+    <q-btn-toggle
+      v-model="tab"
+      glossy
+      push
       no-caps
-      icon="refresh"
-      label="Refresh"
-      @click="refresh">
-    </q-btn>
+      toggle-color="accent"
+      :options="[
+        { label: 'Top', value: 'top', icon: 'highlight' },
+        { label: 'New', value: 'new', icon: 'new_releases' },
+        { label: 'Best', value: 'best', icon: 'star' },
+      ]" />
+  </div>
+
+  <div class="q-mx-lg q-gutter-xs">
     <q-btn-dropdown
       auto-close
-      stretch
-      flat
+      glossy
+      dense
       no-caps
-      icon="autorenew"
-      :label="`Autorefresh ${auto}s`">
-      <q-list>
-        <q-item
-          clickable
-          @click="auto = 15">
-          <q-item-section>15 seconds</q-item-section>
-        </q-item>
-
-        <q-item
-          clickable
-          @click="auto = 30">
-          <q-item-section>30 seconds</q-item-section>
-        </q-item>
-
-        <q-item
-          clickable
-          @click="auto = 60">
-          <q-item-section>60 seconds</q-item-section>
-        </q-item>
-      </q-list>
-    </q-btn-dropdown>
-    <q-btn-dropdown
-      auto-close
-      stretch
-      flat
-      no-caps
-      icon="numbers"
-      :label="`Show ${items}`">
+      color="secondary"
+      icon="list"
+      :label="`Show: ${items}`">
       <q-list>
         <q-item
           clickable
@@ -79,12 +42,51 @@
         </q-item>
       </q-list>
     </q-btn-dropdown>
-  </q-tabs>
+
+    <q-btn-dropdown
+      auto-close
+      glossy
+      dense
+      no-caps
+      color="secondary"
+      icon="autorenew"
+      :label="`Auto refresh: ${auto}s`">
+      <q-list>
+        <q-item
+          clickable
+          @click="auto = 15">
+          <q-item-section>15 seconds</q-item-section>
+        </q-item>
+
+        <q-item
+          clickable
+          @click="auto = 30">
+          <q-item-section>30 seconds</q-item-section>
+        </q-item>
+
+        <q-item
+          clickable
+          @click="auto = 60">
+          <q-item-section>60 seconds</q-item-section>
+        </q-item>
+      </q-list>
+    </q-btn-dropdown>
+
+    <q-btn
+      glossy
+      dense
+      no-caps
+      color="info"
+      icon="refresh"
+      label="Refresh"
+      @click="refresh">
+    </q-btn>
+  </div>
 
   <q-list
     v-if="news"
-    separator
-    tag="ul">
+    class="q-ma-md"
+    tag="ol">
     <StoryItem
       v-for="story of news"
       :story="story"
@@ -117,3 +119,9 @@ function refresh() {
   updateNews();
 }
 </script>
+
+<style lang="scss">
+.q-list .q-item {
+  min-height: unset;
+}
+</style>

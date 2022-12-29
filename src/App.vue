@@ -5,8 +5,12 @@
       elevated
       bordered>
       <q-toolbar class="glossy">
-        <q-avatar rounded>
-          <img src="./assets/Y_Combinator_logo.svg" />
+        <q-avatar
+          class="shadow-5"
+          rounded>
+          <img
+            src="./assets/Y_Combinator_logo.svg"
+            alt="Y Combinator Logo" />
         </q-avatar>
 
         <q-toolbar-title>Hacker News Interface</q-toolbar-title>
@@ -14,7 +18,7 @@
     </q-header>
 
     <q-page-container>
-      <q-page class="q-pa-md">
+      <q-page>
         <RouterView />
       </q-page>
     </q-page-container>
