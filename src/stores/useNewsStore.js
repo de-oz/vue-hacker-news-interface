@@ -4,11 +4,11 @@ import { useGetNews } from '../composables/useGetNews';
 
 export const useNewsStore = defineStore('news', () => {
   const news = ref(null);
-  const intervalId = ref(0);
+  const intervalId = ref(null);
 
-  function updateNews() {
-    useGetNews(news, 5);
-    intervalId.value = setInterval(() => useGetNews(news, 5), 30000);
+  function updateNews(category) {
+    useGetNews(news, category);
+    intervalId.value = setInterval(() => useGetNews(news, category), 30000);
   }
 
   return { news, intervalId, updateNews };

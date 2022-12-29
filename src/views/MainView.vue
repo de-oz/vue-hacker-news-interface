@@ -1,7 +1,8 @@
 <template>
   <div class="row justify-center q-my-sm">
     <q-btn-toggle
-      v-model="tab"
+      v-model="category"
+      @click="refresh"
       glossy
       push
       no-caps
@@ -21,23 +22,23 @@
       no-caps
       color="secondary"
       icon="list"
-      :label="`Show: ${items}`">
+      :label="`Show: ${listLength}`">
       <q-list>
         <q-item
           clickable
-          @click="items = 25">
+          @click="listLength = 25">
           <q-item-section>25 items</q-item-section>
         </q-item>
 
         <q-item
           clickable
-          @click="items = 50">
+          @click="listLength = 50">
           <q-item-section>50 items</q-item-section>
         </q-item>
 
         <q-item
           clickable
-          @click="items = 100">
+          @click="listLength = 100">
           <q-item-section>100 items</q-item-section>
         </q-item>
       </q-list>
@@ -50,23 +51,23 @@
       no-caps
       color="secondary"
       icon="autorenew"
-      :label="`Auto refresh: ${auto}s`">
+      :label="`Auto refresh: ${autoRefresh}s`">
       <q-list>
         <q-item
           clickable
-          @click="auto = 15">
+          @click="autoRefresh = 15">
           <q-item-section>15 seconds</q-item-section>
         </q-item>
 
         <q-item
           clickable
-          @click="auto = 30">
+          @click="autoRefresh = 30">
           <q-item-section>30 seconds</q-item-section>
         </q-item>
 
         <q-item
           clickable
-          @click="auto = 60">
+          @click="autoRefresh = 60">
           <q-item-section>60 seconds</q-item-section>
         </q-item>
       </q-list>
@@ -106,17 +107,16 @@ const store = useNewsStore();
 const { news, intervalId } = storeToRefs(store);
 const { updateNews } = store;
 
-const tab = ref('top');
-const auto = ref(30);
-const items = ref(25);
+const category = ref('top');
+const autoRefresh = ref(15);
+const listLength = ref(25);
 
-updateNews();
-
+updateNews(category);
 onUnmounted(() => clearInterval(intervalId.value));
 
 function refresh() {
   clearInterval(intervalId.value);
-  updateNews();
+  updateNews(category);
 }
 </script>
 
