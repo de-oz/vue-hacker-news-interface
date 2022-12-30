@@ -1,8 +1,7 @@
 <template>
   <div class="row justify-center q-my-sm">
     <q-btn-toggle
-      v-model="category"
-      @click="refresh"
+      v-model="newsCategory"
       glossy
       push
       no-caps
@@ -51,23 +50,23 @@
       no-caps
       color="secondary"
       icon="autorenew"
-      :label="`Auto refresh: ${autoRefresh}s`">
+      :label="`Auto refresh: ${intervalDelay}s`">
       <q-list>
         <q-item
           clickable
-          @click="autoRefresh = 15">
+          @click="intervalDelay = 15">
           <q-item-section>15 seconds</q-item-section>
         </q-item>
 
         <q-item
           clickable
-          @click="autoRefresh = 30">
+          @click="intervalDelay = 30">
           <q-item-section>30 seconds</q-item-section>
         </q-item>
 
         <q-item
           clickable
-          @click="autoRefresh = 60">
+          @click="intervalDelay = 60">
           <q-item-section>60 seconds</q-item-section>
         </q-item>
       </q-list>
@@ -80,7 +79,7 @@
       color="info"
       icon="refresh"
       label="Refresh"
-      @click="refresh">
+      @click="updateNews(newsCategory, intervalDelay, listLength)">
     </q-btn>
   </div>
 
@@ -98,26 +97,23 @@
 </template>
 
 <script setup>
-import { ref, onUnmounted } from 'vue';
+import { ref, watchEffect, onUnmounted } from 'vue';
 import { storeToRefs } from 'pinia';
-import StoryItem from '../components/StoryItem.vue';
 import { useNewsStore } from '../stores/useNewsStore.js';
+import StoryItem from '../components/StoryItem.vue';
 
 const store = useNewsStore();
 const { news, intervalId } = storeToRefs(store);
 const { updateNews } = store;
 
-const category = ref('top');
-const autoRefresh = ref(15);
+const newsCategory = ref('top');
+const intervalDelay = ref(15);
 const listLength = ref(25);
 
-updateNews(category);
+watchEffect(() =>
+  updateNews(newsCategory.value, intervalDelay.value, listLength.value)
+);
 onUnmounted(() => clearInterval(intervalId.value));
-
-function refresh() {
-  clearInterval(intervalId.value);
-  updateNews(category);
-}
 </script>
 
 <style lang="scss">
