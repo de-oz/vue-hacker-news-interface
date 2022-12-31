@@ -76,7 +76,7 @@
       glossy
       dense
       no-caps
-      color="info"
+      color="secondary"
       icon="refresh"
       label="Refresh"
       @click="updateNews(newsCategory, intervalDelay, listLength)">
@@ -92,19 +92,20 @@
       :story="story"
       :key="story.id" />
   </q-list>
-
-  <h1 v-else>LOADING...</h1>
 </template>
 
 <script setup>
 import { ref, watchEffect, onUnmounted } from 'vue';
 import { storeToRefs } from 'pinia';
+import { useQuasar } from 'quasar';
 import { useNewsStore } from '../stores/useNewsStore.js';
 import StoryItem from '../components/StoryItem.vue';
 
 const store = useNewsStore();
-const { news, intervalId } = storeToRefs(store);
+const { news, intervalId, isLoading } = storeToRefs(store);
 const { updateNews } = store;
+
+const $q = useQuasar();
 
 const newsCategory = ref('top');
 const intervalDelay = ref(15);
@@ -113,7 +114,10 @@ const listLength = ref(25);
 watchEffect(() =>
   updateNews(newsCategory.value, intervalDelay.value, listLength.value)
 );
+
 onUnmounted(() => clearInterval(intervalId.value));
+
+watchEffect(() => (isLoading.value ? $q.loading.show() : $q.loading.hide()));
 </script>
 
 <style lang="scss">
