@@ -24,21 +24,11 @@
       :label="`Show: ${listLength}`">
       <q-list>
         <q-item
+          v-for="amount of [25, 50, 100]"
+          :key="amount"
           clickable
-          @click="listLength = 25">
-          <q-item-section>25 items</q-item-section>
-        </q-item>
-
-        <q-item
-          clickable
-          @click="listLength = 50">
-          <q-item-section>50 items</q-item-section>
-        </q-item>
-
-        <q-item
-          clickable
-          @click="listLength = 100">
-          <q-item-section>100 items</q-item-section>
+          @click="listLength = amount">
+          <q-item-section>{{ amount }} items</q-item-section>
         </q-item>
       </q-list>
     </q-btn-dropdown>
@@ -53,21 +43,11 @@
       :label="`Auto refresh: ${intervalDelay}s`">
       <q-list>
         <q-item
+          v-for="number of [15, 30, 60]"
+          :key="number"
           clickable
-          @click="intervalDelay = 15">
-          <q-item-section>15 seconds</q-item-section>
-        </q-item>
-
-        <q-item
-          clickable
-          @click="intervalDelay = 30">
-          <q-item-section>30 seconds</q-item-section>
-        </q-item>
-
-        <q-item
-          clickable
-          @click="intervalDelay = 60">
-          <q-item-section>60 seconds</q-item-section>
+          @click="intervalDelay = number">
+          <q-item-section>{{ number }} seconds</q-item-section>
         </q-item>
       </q-list>
     </q-btn-dropdown>
@@ -105,8 +85,6 @@ const store = useNewsStore();
 const { news, intervalId, isLoading } = storeToRefs(store);
 const { updateNews } = store;
 
-const $q = useQuasar();
-
 const newsCategory = ref('top');
 const intervalDelay = ref(15);
 const listLength = ref(25);
@@ -119,6 +97,8 @@ onUnmounted(() => {
   news.value = null;
   clearInterval(intervalId.value);
 });
+
+const $q = useQuasar();
 
 watchEffect(() => (isLoading.value ? $q.loading.show() : $q.loading.hide()));
 </script>
