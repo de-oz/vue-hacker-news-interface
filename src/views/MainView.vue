@@ -115,7 +115,10 @@ watchEffect(() =>
   updateNews(newsCategory.value, intervalDelay.value, listLength.value)
 );
 
-onUnmounted(() => clearInterval(intervalId.value));
+onUnmounted(() => {
+  news.value = null;
+  clearInterval(intervalId.value);
+});
 
 watchEffect(() => (isLoading.value ? $q.loading.show() : $q.loading.hide()));
 </script>

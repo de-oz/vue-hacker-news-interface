@@ -27,38 +27,49 @@
       </template>
     </q-banner>
 
-    <q-toolbar class="q-pl-md">
-      <q-toolbar-title shrink>
-        Comments: {{ story.descendants }}
-      </q-toolbar-title>
+    <div class="comment-section">
+      <q-toolbar class="q-pl-md">
+        <q-toolbar-title shrink>
+          Comments: {{ story.descendants }}
+        </q-toolbar-title>
 
-      <q-btn
-        color="deep-orange-8"
-        glossy
-        no-caps
-        dense
-        icon="refresh"
-        @click="refresh" />
-    </q-toolbar>
+        <q-btn
+          color="accent"
+          glossy
+          no-caps
+          dense
+          icon="refresh"
+          @click="refresh" />
+      </q-toolbar>
 
-    <Suspense timeout="0">
-      <q-list
-        tag="ul"
-        separator
-        :key="story.descendants">
-        <CommentItem
-          v-for="commentId of story.kids"
-          :key="commentId"
-          :commentId="commentId" />
-      </q-list>
+      <Suspense timeout="0">
+        <q-list
+          tag="ul"
+          separator
+          :key="story.descendants">
+          <CommentItem
+            v-for="commentId of story.kids"
+            :key="commentId"
+            :commentId="commentId" />
+        </q-list>
 
-      <template #fallback>
-        <h2>LOADING...</h2>
-      </template>
-    </Suspense>
+        <template #fallback>
+          <q-inner-loading :showing="true">
+            <q-spinner-ball
+              size="5em"
+              color="amber" />
+          </q-inner-loading>
+        </template>
+      </Suspense>
+    </div>
   </template>
 
-  <h1 v-else>LOADING...</h1>
+  <q-inner-loading :showing="!story">
+    <q-spinner-gears
+      size="5em"
+      color="accent" />
+    <div class="q-pa-md">Fetching the story...</div>
+  </q-inner-loading>
 </template>
 
 <script setup>
@@ -85,3 +96,10 @@ function refresh() {
   useGetStory(props.id, story);
 }
 </script>
+
+<style lang="scss" scoped>
+.comment-section {
+  position: relative;
+  min-height: 50vh;
+}
+</style>

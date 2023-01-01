@@ -37,7 +37,13 @@
               expand />
 
             <template #fallback>
-              <h1>LOADING...</h1>
+              <div class="comment-section">
+                <q-inner-loading :showing="true">
+                  <q-spinner-bars
+                    size="5em"
+                    color="amber" />
+                </q-inner-loading>
+              </div>
             </template>
           </Suspense>
 
@@ -69,3 +75,10 @@ const isValid = computed(() => !comment.value.deleted && !comment.value.dead);
 
 await useGetStory(props.commentId, comment);
 </script>
+
+<style lang="scss" scoped>
+.comment-section {
+  position: relative;
+  min-height: 10vh;
+}
+</style>
