@@ -8,7 +8,9 @@
         {{ new Date(comment.time * 1000).toLocaleString() }}
       </q-item-label>
 
-      <q-item-label v-html="comment.text" />
+      <div
+        v-html="comment.text"
+        class="q-item__label" />
 
       <template v-if="comment.kids">
         <q-item-label>
@@ -18,7 +20,7 @@
             no-caps
             dense
             :icon="isExpanded ? 'expand_less' : 'expand_more'"
-            @click="isExpanded = !isExpanded">
+            @click="toggleSubcomments">
             {{ isExpanded ? 'Collapse' : 'Expand' }}
           </q-btn>
         </q-item-label>
@@ -28,13 +30,12 @@
           tag="ul"
           separator>
           <Suspense
-            v-if="!expand"
+            v-if="isExpansionInitiator"
             timeout="0">
             <CommentItem
               v-for="commentId of comment.kids"
               :key="commentId"
-              :commentId="commentId"
-              expand />
+              :commentId="commentId" />
 
             <template #fallback>
               <div class="comment-section">
@@ -51,8 +52,7 @@
             v-else
             v-for="commentId of comment.kids"
             :key="commentId"
-            :commentId="commentId"
-            expand />
+            :commentId="commentId" />
         </q-list>
       </template>
     </q-item-section>
@@ -65,13 +65,19 @@ import { useGetStory } from '../composables/useGetStory.js';
 
 const props = defineProps({
   commentId: Number,
-  expand: Boolean, // default is false, nested comments are collapsed by default
+  collapse: Boolean,
 });
 
-const isExpanded = ref(props.expand);
+const isExpanded = ref(!props.collapse); // set to false on a root comment and to true on nested comments
+const isExpansionInitiator = ref(false);
 
 const comment = ref(null);
 const isValid = computed(() => !comment.value.deleted && !comment.value.dead);
+
+function toggleSubcomments() {
+  isExpanded.value = !isExpanded.value;
+  isExpansionInitiator.value = isExpanded.value; // set to true only on a comment whose expand button was clicked
+}
 
 await useGetStory(props.commentId, comment);
 </script>

@@ -50,7 +50,8 @@
           <CommentItem
             v-for="commentId of story.kids"
             :key="commentId"
-            :commentId="commentId" />
+            :commentId="commentId"
+            collapse />
         </q-list>
 
         <template #fallback>
