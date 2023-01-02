@@ -12,7 +12,7 @@
         v-html="comment.text"
         class="q-item__label" />
 
-      <template v-if="comment.kids">
+      <template v-if="hasSubcomments">
         <q-item-label>
           <q-btn
             glossy
@@ -68,10 +68,11 @@ const props = defineProps({
   collapse: Boolean,
 });
 
+const comment = ref(null);
+const hasSubcomments = ref(false);
 const isExpanded = ref(!props.collapse); // set to false on a root comment and to true on nested comments
 const isExpansionInitiator = ref(false);
 
-const comment = ref(null);
 const isValid = computed(() => !comment.value.deleted && !comment.value.dead);
 
 function toggleSubcomments() {
@@ -80,6 +81,17 @@ function toggleSubcomments() {
 }
 
 await useGetStory(props.commentId, comment);
+
+if (comment.value.kids) {
+  for (const commentId of comment.value.kids) {
+    const subcomment = await useGetStory(commentId);
+
+    if (!subcomment.deleted && !subcomment.dead) {
+      hasSubcomments.value = true; // set to true only if comment.kids exists and contains at least one valid comment
+      break;
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
