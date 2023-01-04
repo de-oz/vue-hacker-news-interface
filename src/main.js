@@ -24,6 +24,7 @@ app.use(Quasar, {
       message: 'Updating the news list...',
       messageColor: 'primary',
       backgroundColor: 'secondary',
+      spinnerSize: '7em',
     },
   },
 });

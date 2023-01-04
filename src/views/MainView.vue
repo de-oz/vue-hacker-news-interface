@@ -2,10 +2,16 @@
   <div class="row justify-center q-my-sm">
     <q-btn-toggle
       v-model="newsCategory"
+      size="16px"
+      padding="6px lg"
+      toggle-color="accent"
+      spread
+      no-wrap
+      rounded
       glossy
       push
       no-caps
-      toggle-color="accent"
+      :ripple="false"
       :options="[
         { label: 'Top', value: 'top', icon: 'highlight' },
         { label: 'New', value: 'new', icon: 'new_releases' },
@@ -13,16 +19,19 @@
       ]" />
   </div>
 
-  <div class="q-mx-lg q-gutter-xs">
+  <div class="q-mx-lg q-gutter-sm">
     <q-btn-dropdown
-      auto-close
-      glossy
-      dense
-      no-caps
-      color="secondary"
+      :label="`Show: ${listLength}`"
       icon="list"
-      :label="`Show: ${listLength}`">
-      <q-list>
+      padding="xs sm"
+      color="secondary"
+      text-color="black"
+      auto-close
+      dense
+      glossy
+      no-wrap
+      no-caps>
+      <q-list separator>
         <q-item
           v-for="amount of [25, 50, 100]"
           :key="amount"
@@ -34,14 +43,17 @@
     </q-btn-dropdown>
 
     <q-btn-dropdown
-      auto-close
-      glossy
-      dense
-      no-caps
-      color="secondary"
+      :label="`Auto refresh: ${intervalDelay}s`"
       icon="autorenew"
-      :label="`Auto refresh: ${intervalDelay}s`">
-      <q-list>
+      padding="xs sm"
+      color="secondary"
+      text-color="black"
+      auto-close
+      dense
+      glossy
+      no-wrap
+      no-caps>
+      <q-list separator>
         <q-item
           v-for="number of [15, 30, 60]"
           :key="number"
@@ -53,14 +65,15 @@
     </q-btn-dropdown>
 
     <q-btn
-      glossy
-      dense
-      no-caps
-      color="secondary"
-      icon="refresh"
       label="Refresh"
-      @click="updateNews(newsCategory, intervalDelay, listLength)">
-    </q-btn>
+      icon="refresh"
+      padding="xs sm"
+      color="secondary"
+      text-color="black"
+      dense
+      glossy
+      no-caps
+      @click="updateNews(newsCategory, intervalDelay, listLength)" />
   </div>
 
   <q-list
@@ -93,18 +106,19 @@ watchEffect(() =>
   updateNews(newsCategory.value, intervalDelay.value, listLength.value)
 );
 
+const $q = useQuasar();
+
+watchEffect(() => (isLoading.value ? $q.loading.show() : $q.loading.hide()));
+
 onUnmounted(() => {
   news.value = null;
   clearInterval(intervalId.value);
 });
-
-const $q = useQuasar();
-
-watchEffect(() => (isLoading.value ? $q.loading.show() : $q.loading.hide()));
 </script>
 
 <style lang="scss">
-.q-list .q-item {
+.q-menu .q-item {
+  background-color: $secondary;
   min-height: unset;
 }
 </style>

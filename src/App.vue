@@ -13,12 +13,12 @@
             alt="Y Combinator Logo" />
         </q-avatar>
 
-        <q-toolbar-title>Hacker News Interface</q-toolbar-title>
+        <q-toolbar-title class="text-h5">Hacker News Interface</q-toolbar-title>
       </q-toolbar>
     </q-header>
 
     <q-page-container>
-      <q-page>
+      <q-page class="q-px-md">
         <RouterView />
       </q-page>
     </q-page-container>
