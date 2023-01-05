@@ -7,7 +7,7 @@
         </q-item-label>
 
         <q-item-label caption>
-          by {{ story.by }}, {{ dayjs.unix(story.time).fromNow() }}
+          posted by {{ story.by }} {{ dayjs.unix(story.time).fromNow() }}
         </q-item-label>
 
         <q-item-label class="q-gutter-sm">

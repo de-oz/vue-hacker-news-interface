@@ -1,40 +1,80 @@
 <template>
   <template v-if="story">
-    <q-banner inline-actions>
-      <h1 class="text-h4">
-        {{ story.title }}
-      </h1>
-      <a
-        :href="story.url"
-        target="_blank"
-        rel="noreferrer">
-        {{ story.url }}
-      </a>
-      <div>
-        Author: <span>{{ story.by }}</span>
-      </div>
-      <div>Date: {{ new Date(story.time * 1000).toLocaleString() }}</div>
+    <div class="q-mx-md q-my-md">
+      <q-btn
+        icon="home"
+        label="Back to Main"
+        padding="xs sm"
+        color="indigo"
+        outline
+        rounded
+        no-caps
+        no-wrap
+        :to="{ name: 'main' }" />
 
-      <template #action>
+      <h1 class="text-weight-bold q-mt-md q-mb-sm text-h5">
+        {{ story.title }}
         <q-btn
+          :href="story.url"
+          target="_blank"
+          icon="link"
+          label="Go to URL"
+          class="q-ml-sm"
+          padding="2px sm"
+          color="red"
+          no-wrap
           rounded
-          glossy
-          no-caps
-          icon="home"
-          label="Back to Main"
-          color="indigo-8"
-          :to="{ name: 'main' }" />
-      </template>
-    </q-banner>
+          dense
+          outline
+          no-caps />
+      </h1>
+
+      <q-chip>
+        <q-avatar
+          icon="thumb_up"
+          color="red"
+          text-color="white" />
+        Score: {{ story.score }}
+      </q-chip>
+
+      <q-chip>
+        <q-avatar
+          icon="person"
+          color="red"
+          text-color="white" />
+        Author: {{ story.by }}
+      </q-chip>
+
+      <div>
+        <q-chip>
+          <q-avatar
+            icon="calendar_month"
+            color="red"
+            text-color="white" />
+          Date: {{ dayjs.unix(story.time).format('DD/MM/YYYY HH:mm') }} ({{
+            dayjs.unix(story.time).fromNow()
+          }})
+        </q-chip>
+      </div>
+    </div>
+
+    <q-separator></q-separator>
 
     <div class="comment-section">
       <q-toolbar class="q-pl-md">
-        <q-toolbar-title shrink>
+        <q-toolbar-title
+          class="text-h6"
+          shrink>
+          <q-icon
+            color="blue"
+            size="sm"
+            name="forum" />
           Comments: {{ story.descendants }}
         </q-toolbar-title>
 
         <q-btn
           color="accent"
+          round
           glossy
           no-caps
           dense
@@ -78,6 +118,10 @@ import { ref } from 'vue';
 import CommentItem from '../components/CommentItem.vue';
 import { useGetStory } from '../composables/useGetStory.js';
 import { useNewsStore } from '../stores/useNewsStore.js';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+
+dayjs.extend(relativeTime);
 
 const props = defineProps({
   id: { type: Number, required: true },

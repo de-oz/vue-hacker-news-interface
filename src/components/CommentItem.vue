@@ -4,25 +4,33 @@
     tag="li">
     <q-item-section>
       <q-item-label>
-        by {{ comment.by }}; posted:
-        {{ new Date(comment.time * 1000).toLocaleString() }}
+        <q-icon
+          size="md"
+          name="account_circle" />
+        {{ comment.by }} {{ dayjs.unix(comment.time).fromNow() }} ({{
+          dayjs.unix(comment.time).format('DD/MM/YYYY HH:mm')
+        }})
       </q-item-label>
 
       <div
         v-html="comment.text"
-        class="q-item__label" />
+        class="comment-text" />
 
       <template v-if="hasSubcomments">
         <q-item-label>
           <q-btn
-            glossy
+            :label="isExpanded ? 'Collapse' : 'Expand'"
+            :icon="isExpanded ? 'expand_less' : 'expand_more'"
+            size="12px"
+            padding="2px 8px"
+            rounded
             ripple
+            unelevated
+            color="blue"
+            glossy
             no-caps
             dense
-            :icon="isExpanded ? 'expand_less' : 'expand_more'"
-            @click="toggleSubcomments">
-            {{ isExpanded ? 'Collapse' : 'Expand' }}
-          </q-btn>
+            @click="toggleSubcomments" />
         </q-item-label>
 
         <q-list
@@ -62,6 +70,10 @@
 <script setup>
 import { ref, computed } from 'vue';
 import { useGetStory } from '../composables/useGetStory.js';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+
+dayjs.extend(relativeTime);
 
 const props = defineProps({
   commentId: Number,
@@ -98,5 +110,10 @@ if (comment.value.kids) {
 .comment-section {
   position: relative;
   min-height: 10vh;
+}
+
+.comment-text {
+  line-height: 1.25;
+  margin: 12px 0 6px;
 }
 </style>

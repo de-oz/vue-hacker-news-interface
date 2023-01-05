@@ -24,3 +24,9 @@
     </q-page-container>
   </q-layout>
 </template>
+
+<style>
+* > p:last-child {
+  margin: 0;
+}
+</style>
