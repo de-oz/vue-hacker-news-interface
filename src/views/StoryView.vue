@@ -1,37 +1,42 @@
 <template>
   <template v-if="story">
     <div class="q-mx-md q-my-md">
-      <q-btn
-        icon="home"
-        label="Back to Main"
-        padding="xs sm"
-        color="indigo"
-        outline
-        rounded
-        no-caps
-        no-wrap
-        :to="{ name: 'main' }" />
-
       <h1 class="text-weight-bold q-mt-md q-mb-sm text-h5">
         {{ story.title }}
+      </h1>
+
+      <div class="q-my-sm">
+        <q-btn
+          :to="{ name: 'main' }"
+          icon="home"
+          label="Main"
+          padding="xs md"
+          color="indigo"
+          dense
+          outline
+          rounded
+          no-caps
+          no-wrap />
+
         <q-btn
           :href="story.url"
           target="_blank"
           icon="link"
-          label="Go to URL"
+          label="URL"
           class="q-ml-sm"
-          padding="2px sm"
+          padding="xs md"
           color="red"
           no-wrap
           rounded
           dense
           outline
           no-caps />
-      </h1>
+      </div>
 
       <q-chip>
         <q-avatar
           icon="thumb_up"
+          size="md"
           color="red"
           text-color="white" />
         Score: {{ story.score }}
@@ -40,28 +45,28 @@
       <q-chip>
         <q-avatar
           icon="person"
+          size="md"
           color="red"
           text-color="white" />
         Author: {{ story.by }}
       </q-chip>
 
-      <div>
-        <q-chip>
-          <q-avatar
-            icon="calendar_month"
-            color="red"
-            text-color="white" />
-          Date: {{ dayjs.unix(story.time).format('DD/MM/YYYY HH:mm') }} ({{
-            dayjs.unix(story.time).fromNow()
-          }})
-        </q-chip>
-      </div>
+      <q-chip>
+        <q-avatar
+          icon="calendar_month"
+          size="md"
+          color="red"
+          text-color="white" />
+        Date: {{ dayjs.unix(story.time).format('DD/MM/YYYY HH:mm') }} ({{
+          dayjs.unix(story.time).fromNow()
+        }})
+      </q-chip>
     </div>
 
     <q-separator></q-separator>
 
     <div class="comment-section">
-      <q-toolbar class="q-pl-md">
+      <q-toolbar class="q-pl-lg">
         <q-toolbar-title
           class="text-h6"
           shrink>
@@ -86,7 +91,7 @@
         <q-list
           tag="ul"
           separator
-          :key="story.descendants">
+          :key="() => (commentsToggle = !commentsToggle)">
           <CommentItem
             v-for="commentId of story.kids"
             :key="commentId"
@@ -96,9 +101,9 @@
 
         <template #fallback>
           <q-inner-loading :showing="true">
-            <q-spinner-ball
+            <q-spinner-oval
               size="5em"
-              color="amber" />
+              color="red" />
           </q-inner-loading>
         </template>
       </Suspense>
@@ -127,6 +132,7 @@ const props = defineProps({
 
 const { news } = useNewsStore();
 const story = ref(null);
+let commentsToggle = false;
 
 if (news) {
   story.value = news.find((item) => item.id === props.id);
