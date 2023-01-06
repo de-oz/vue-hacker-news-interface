@@ -68,12 +68,10 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, inject } from 'vue';
 import { useGetStory } from '../composables/useGetStory.js';
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
 
-dayjs.extend(relativeTime);
+const dayjs = inject('dayjs');
 
 const props = defineProps({
   commentId: Number,
@@ -89,7 +87,7 @@ const isValid = computed(() => !comment.value.deleted && !comment.value.dead);
 
 function toggleSubcomments() {
   isExpanded.value = !isExpanded.value;
-  isExpansionInitiator.value = isExpanded.value; // set to true only on a comment whose expand button was clicked
+  isExpansionInitiator.value = isExpanded.value; // set to true only on the comment whose expand button was clicked
 }
 
 await useGetStory(props.commentId, comment);

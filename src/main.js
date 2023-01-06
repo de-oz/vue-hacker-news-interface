@@ -9,6 +9,10 @@ import './assets/main.css';
 import '@quasar/extras/material-icons/material-icons.css';
 import 'quasar/src/css/index.sass';
 
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+dayjs.extend(relativeTime);
+
 const app = createApp(App);
 
 app.use(router);
@@ -28,5 +32,7 @@ app.use(Quasar, {
     },
   },
 });
+
+app.provide('dayjs', dayjs);
 
 app.mount('#app');

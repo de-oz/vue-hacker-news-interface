@@ -38,11 +38,9 @@
 </template>
 
 <script setup>
-import { computed, toRef } from 'vue';
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
+import { computed, toRef, inject } from 'vue';
 
-dayjs.extend(relativeTime);
+const dayjs = inject('dayjs');
 
 const props = defineProps({
   story: Object,

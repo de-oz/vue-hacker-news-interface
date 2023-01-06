@@ -114,21 +114,18 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, inject } from 'vue';
 import CommentItem from '../components/CommentItem.vue';
 import { useGetStory } from '../composables/useGetStory.js';
 import { useNewsStore } from '../stores/useNewsStore.js';
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
 
-dayjs.extend(relativeTime);
+const dayjs = inject('dayjs');
 
 const props = defineProps({
   id: { type: Number, required: true },
 });
 
 const { news } = useNewsStore();
-
 const story = ref(null);
 
 if (news) {
