@@ -25,10 +25,10 @@ app.use(Quasar, {
     loading: {
       spinner: QSpinnerGears,
       spinnerColor: 'accent',
+      spinnerSize: '130',
       message: 'Updating the news list...',
       messageColor: 'primary',
       backgroundColor: 'secondary',
-      spinnerSize: '7em',
     },
   },
 });

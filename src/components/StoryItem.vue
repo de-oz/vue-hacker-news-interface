@@ -2,7 +2,7 @@
   <li v-if="isValid">
     <q-item :to="{ name: 'story', params: { id: story.id } }">
       <q-item-section>
-        <q-item-label class="text-subtitle1">
+        <q-item-label class="text-weight-bold text-subtitle1">
           {{ story.title }}
         </q-item-label>
 
@@ -10,9 +10,9 @@
           posted by {{ story.by }} {{ dayjs.unix(story.time).fromNow() }}
         </q-item-label>
 
-        <q-item-label class="q-gutter-sm">
+        <div class="q-mt-xs q-gutter-x-sm q-gutter-y-xs">
           <q-badge
-            class="q-py-xs"
+            class="q-py-xs q-px-sm"
             color="red"
             rounded>
             Score: {{ story.score }}
@@ -22,7 +22,7 @@
           </q-badge>
 
           <q-badge
-            class="q-py-xs"
+            class="q-py-xs q-px-sm"
             color="blue"
             rounded>
             Comments: {{ story.descendants }}
@@ -30,10 +30,10 @@
               name="comment"
               class="q-ml-xs" />
           </q-badge>
-        </q-item-label>
+        </div>
       </q-item-section>
     </q-item>
-    <q-separator inset />
+    <q-separator spaced="sm" />
   </li>
 </template>
 

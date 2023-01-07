@@ -1,8 +1,8 @@
 <template>
-  <div class="row justify-center q-my-sm">
+  <div class="row justify-center q-mb-md q-mt-sm">
     <q-btn-toggle
       v-model="newsCategory"
-      size="16px"
+      size="15px"
       padding="6px lg"
       toggle-color="accent"
       spread
@@ -23,12 +23,12 @@
     <q-btn-dropdown
       :label="`Show: ${listLength}`"
       icon="list"
-      padding="xs sm"
+      padding="2px 6px"
       color="secondary"
       text-color="black"
+      :ripple="false"
       auto-close
       dense
-      glossy
       no-wrap
       no-caps>
       <q-list separator>
@@ -45,12 +45,12 @@
     <q-btn-dropdown
       :label="`Auto refresh: ${intervalDelay}s`"
       icon="autorenew"
-      padding="xs sm"
+      padding="2px 6px"
       color="secondary"
       text-color="black"
+      :ripple="false"
       auto-close
       dense
-      glossy
       no-wrap
       no-caps>
       <q-list separator>
@@ -67,11 +67,10 @@
     <q-btn
       label="Refresh"
       icon="refresh"
-      padding="xs sm"
+      padding="2px 6px"
       color="secondary"
       text-color="black"
       dense
-      glossy
       no-caps
       @click="updateNews(newsCategory, intervalDelay, listLength)" />
   </div>
@@ -99,8 +98,8 @@ const { news, intervalId, isLoading } = storeToRefs(store);
 const { updateNews } = store;
 
 const newsCategory = ref('top');
-const intervalDelay = ref(15);
-const listLength = ref(25);
+const intervalDelay = ref(30);
+const listLength = ref(50);
 
 watchEffect(() =>
   updateNews(newsCategory.value, intervalDelay.value, listLength.value)

@@ -17,7 +17,7 @@
       </q-toolbar>
     </q-header>
 
-    <q-page-container>
+    <q-page-container class="bg-info">
       <q-page class="q-px-md">
         <RouterView />
       </q-page>
@@ -25,7 +25,7 @@
   </q-layout>
 </template>
 
-<style>
+<style lang="scss">
 * > p:last-child {
   margin: 0;
 }
