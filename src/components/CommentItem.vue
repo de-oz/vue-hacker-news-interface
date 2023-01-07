@@ -5,6 +5,7 @@
     <q-item-section>
       <q-item-label>
         <q-icon
+          color="primary"
           size="md"
           name="account_circle" />
         {{ comment.by }} {{ dayjs.unix(comment.time).fromNow() }} ({{
@@ -26,7 +27,7 @@
             rounded
             ripple
             unelevated
-            color="blue"
+            color="primary"
             glossy
             no-caps
             dense
@@ -36,6 +37,7 @@
         <q-list
           v-if="isExpanded"
           tag="ul"
+          class="q-gutter-y-xs"
           separator>
           <Suspense
             v-if="isExpansionInitiator"
@@ -46,13 +48,9 @@
               :commentId="commentId" />
 
             <template #fallback>
-              <div class="comment-section">
-                <q-inner-loading :showing="true">
-                  <q-spinner-bars
-                    size="5em"
-                    color="amber" />
-                </q-inner-loading>
-              </div>
+              <q-inner-loading :showing="true">
+                <q-spinner-gears color="positive" />
+              </q-inner-loading>
             </template>
           </Suspense>
 
@@ -105,9 +103,11 @@ if (comment.value.kids) {
 </script>
 
 <style lang="scss" scoped>
-.comment-section {
+.q-inner-loading {
   position: relative;
-  min-height: 10vh;
+  background-color: transparent;
+  font-size: 75px;
+  height: 83px;
 }
 
 .comment-text {

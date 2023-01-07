@@ -25,8 +25,8 @@ app.use(Quasar, {
     loading: {
       spinner: QSpinnerGears,
       spinnerColor: 'accent',
-      spinnerSize: '130',
-      message: 'Updating the news list...',
+      spinnerSize: '120',
+      message: 'Updating the data...',
       messageColor: 'primary',
       backgroundColor: 'secondary',
     },

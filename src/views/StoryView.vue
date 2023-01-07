@@ -1,7 +1,7 @@
 <template>
   <template v-if="story">
-    <div class="q-mx-md q-my-md">
-      <h1 class="text-weight-bold q-mt-md q-mb-sm text-h5">
+    <div class="q-ma-md">
+      <h1 class="text-weight-bold q-mt-md text-h5">
         {{ story.title }}
       </h1>
 
@@ -9,11 +9,10 @@
         <q-btn
           :to="{ name: 'main' }"
           icon="home"
-          label="Main"
+          label="Back to Main"
           padding="xs md"
-          color="indigo"
+          color="primary"
           dense
-          outline
           rounded
           no-caps
           no-wrap />
@@ -22,40 +21,39 @@
           :href="story.url"
           target="_blank"
           icon="link"
-          label="URL"
-          class="q-ml-sm"
+          label="Go to URL"
           padding="xs md"
-          color="red"
-          no-wrap
-          rounded
+          class="q-ml-sm"
+          color="positive"
           dense
-          outline
-          no-caps />
+          rounded
+          no-caps
+          no-wrap />
       </div>
 
-      <q-chip>
+      <q-chip color="secondary">
         <q-avatar
           icon="thumb_up"
           size="md"
-          color="red"
+          color="negative"
           text-color="white" />
         Score: {{ story.score }}
       </q-chip>
 
-      <q-chip>
+      <q-chip color="secondary">
         <q-avatar
           icon="person"
           size="md"
-          color="red"
+          color="negative"
           text-color="white" />
         Author: {{ story.by }}
       </q-chip>
 
-      <q-chip>
+      <q-chip color="secondary">
         <q-avatar
           icon="calendar_month"
           size="md"
-          color="red"
+          color="negative"
           text-color="white" />
         Date: {{ dayjs.unix(story.time).format('DD/MM/YYYY HH:mm') }} ({{
           dayjs.unix(story.time).fromNow()
@@ -63,9 +61,9 @@
       </q-chip>
     </div>
 
-    <q-separator></q-separator>
+    <q-separator spaced="sm" />
 
-    <div class="comment-section">
+    <div class="relative-position">
       <q-toolbar class="q-pl-lg">
         <q-toolbar-title
           class="text-h6"
@@ -78,7 +76,7 @@
         </q-toolbar-title>
 
         <q-btn
-          color="accent"
+          color="positive"
           round
           glossy
           no-caps
@@ -90,6 +88,7 @@
       <Suspense timeout="0">
         <q-list
           tag="ul"
+          class="q-gutter-y-xs"
           separator
           :key="() => (commentsToggle = !commentsToggle)">
           <CommentItem
@@ -101,25 +100,17 @@
 
         <template #fallback>
           <q-inner-loading :showing="true">
-            <q-spinner-oval
-              size="5em"
-              color="red" />
+            <q-spinner-tail color="positive" />
           </q-inner-loading>
         </template>
       </Suspense>
     </div>
   </template>
-
-  <q-inner-loading :showing="!story">
-    <q-spinner-gears
-      size="5em"
-      color="accent" />
-    <div class="q-pa-md">Fetching the story...</div>
-  </q-inner-loading>
 </template>
 
 <script setup>
-import { ref, inject } from 'vue';
+import { ref, watchEffect, inject } from 'vue';
+import { useQuasar } from 'quasar';
 import CommentItem from '../components/CommentItem.vue';
 import { useGetStory } from '../composables/useGetStory.js';
 import { useNewsStore } from '../stores/useNewsStore.js';
@@ -143,11 +134,17 @@ if (news) {
 function refresh() {
   useGetStory(props.id, story);
 }
+
+const $q = useQuasar();
+
+watchEffect(() => (story.value ? $q.loading.hide() : $q.loading.show()));
 </script>
 
 <style lang="scss" scoped>
-.comment-section {
-  position: relative;
-  min-height: 50vh;
+.q-inner-loading {
+  background-color: transparent;
+  font-size: 100px;
+  height: 200px;
+  top: 50px;
 }
 </style>
