@@ -26,7 +26,6 @@ app.use(Quasar, {
       spinner: QSpinnerGears,
       spinnerColor: 'accent',
       spinnerSize: '120',
-      message: 'Updating the data...',
       messageColor: 'primary',
       backgroundColor: 'secondary',
     },

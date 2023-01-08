@@ -26,7 +26,7 @@
 </template>
 
 <style lang="scss">
-* > p:last-child {
+div > p:last-child {
   margin: 0;
 }
 </style>

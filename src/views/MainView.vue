@@ -106,6 +106,7 @@ watchEffect(() =>
 );
 
 const $q = useQuasar();
+$q.loading.setDefaults({ message: 'Updating the news list...' });
 
 watchEffect(() => (isLoading.value ? $q.loading.show() : $q.loading.hide()));
 

@@ -8,9 +8,10 @@
           color="primary"
           size="md"
           name="account_circle" />
-        {{ comment.by }} {{ dayjs.unix(comment.time).fromNow() }} ({{
-          dayjs.unix(comment.time).format('DD/MM/YYYY HH:mm')
-        }})
+        <span class="text-italic">
+          <span class="author">{{ comment.by }}</span>
+          {{ dayjs.unix(comment.time).fromNow() }}
+        </span>
       </q-item-label>
 
       <div
@@ -22,11 +23,12 @@
           <q-btn
             :label="isExpanded ? 'Collapse' : 'Expand'"
             :icon="isExpanded ? 'expand_less' : 'expand_more'"
+            :ripple="false"
             size="12px"
-            padding="2px 8px"
+            padding="2px 10px 2px 6px"
             rounded
-            ripple
             unelevated
+            class="text-weight-bold"
             color="primary"
             glossy
             no-caps
@@ -107,11 +109,16 @@ if (comment.value.kids) {
   position: relative;
   background-color: transparent;
   font-size: 75px;
-  height: 83px;
+  height: 83.5px;
 }
 
 .comment-text {
   line-height: 1.25;
-  margin: 12px 0 6px;
+  margin: 10px 0 8px;
+}
+
+.author {
+  font-weight: bold;
+  margin-left: 4px;
 }
 </style>

@@ -35,7 +35,7 @@
         <q-avatar
           icon="thumb_up"
           size="md"
-          color="negative"
+          color="deep-orange"
           text-color="white" />
         Score: {{ story.score }}
       </q-chip>
@@ -44,7 +44,7 @@
         <q-avatar
           icon="person"
           size="md"
-          color="negative"
+          color="deep-orange"
           text-color="white" />
         Author: {{ story.by }}
       </q-chip>
@@ -53,7 +53,7 @@
         <q-avatar
           icon="calendar_month"
           size="md"
-          color="negative"
+          color="deep-orange"
           text-color="white" />
         Date: {{ dayjs.unix(story.time).format('DD/MM/YYYY HH:mm') }} ({{
           dayjs.unix(story.time).fromNow()
@@ -69,14 +69,14 @@
           class="text-h6"
           shrink>
           <q-icon
-            color="blue"
+            color="primary"
             size="sm"
             name="forum" />
           Comments: {{ story.descendants }}
         </q-toolbar-title>
 
         <q-btn
-          color="positive"
+          color="deep-orange"
           round
           glossy
           no-caps
@@ -88,7 +88,7 @@
       <Suspense timeout="0">
         <q-list
           tag="ul"
-          class="q-gutter-y-xs"
+          class="q-pl-sm q-gutter-y-xs"
           separator
           :key="() => (commentsToggle = !commentsToggle)">
           <CommentItem
@@ -136,6 +136,7 @@ function refresh() {
 }
 
 const $q = useQuasar();
+$q.loading.setDefaults({ message: 'Loading the story...' });
 
 watchEffect(() => (story.value ? $q.loading.hide() : $q.loading.show()));
 </script>
@@ -144,7 +145,6 @@ watchEffect(() => (story.value ? $q.loading.hide() : $q.loading.show()));
 .q-inner-loading {
   background-color: transparent;
   font-size: 100px;
-  height: 200px;
-  top: 50px;
+  height: 300px;
 }
 </style>
