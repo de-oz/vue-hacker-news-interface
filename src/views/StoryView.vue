@@ -139,4 +139,16 @@ watchEffect(() => (story.value ? $q.loading.hide() : $q.loading.show()));
   font-size: 100px;
   height: 300px;
 }
+
+ul {
+  padding: 0;
+}
+
+li {
+  padding: 8px 12px 0px;
+
+  &:first-of-type {
+    padding-top: 0;
+  }
+}
 </style>

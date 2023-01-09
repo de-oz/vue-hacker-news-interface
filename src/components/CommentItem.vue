@@ -106,17 +106,21 @@ if (comment.value.kids) {
 .q-inner-loading {
   position: relative;
   background-color: transparent;
-  font-size: 75px;
+  font-size: 70px;
   height: 83.5px;
 }
 
 .comment-text {
   line-height: 1.25;
-  margin: 10px 0 8px;
+  margin: 12px 0 8px;
 }
 
 .author {
   font-weight: bold;
   margin-left: 4px;
+}
+
+li {
+  padding: 8px 0 0 12px;
 }
 </style>
