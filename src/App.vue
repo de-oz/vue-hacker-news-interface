@@ -6,7 +6,7 @@
       bordered>
       <q-toolbar class="glossy">
         <q-avatar
-          class="shadow-5"
+          class="shadow-3"
           rounded>
           <img
             src="./assets/Y_Combinator_logo.svg"
@@ -17,8 +17,8 @@
       </q-toolbar>
     </q-header>
 
-    <q-page-container class="bg-info">
-      <q-page class="q-px-md">
+    <q-page-container>
+      <q-page>
         <RouterView />
       </q-page>
     </q-page-container>
@@ -26,7 +26,15 @@
 </template>
 
 <style lang="scss">
+body {
+  background-color: $info;
+}
+
 div > p:last-child {
   margin: 0;
+}
+
+.q-page {
+  margin: 8px 32px;
 }
 </style>

@@ -1,15 +1,15 @@
 <template>
-  <div class="row justify-center q-mb-md q-mt-sm">
+  <div class="row justify-center">
     <q-btn-toggle
       v-model="newsCategory"
       size="15px"
       padding="6px lg"
       toggle-color="accent"
       spread
-      no-wrap
       rounded
       glossy
       push
+      no-wrap
       no-caps
       :ripple="false"
       :options="[
@@ -19,25 +19,28 @@
       ]" />
   </div>
 
-  <div class="q-mx-lg q-gutter-sm">
+  <div class="q-my-md q-gutter-x-md">
     <q-btn-dropdown
       :label="`Show: ${listLength}`"
       icon="list"
-      padding="2px 6px"
+      padding="xs 6px"
       color="secondary"
       text-color="black"
-      :ripple="false"
       auto-close
       dense
       no-wrap
-      no-caps>
-      <q-list separator>
+      no-caps
+      :ripple="false">
+      <q-list
+        separator
+        dense>
         <q-item
-          v-for="amount of [25, 50, 100]"
-          :key="amount"
+          v-for="value of [25, 50, 100]"
+          :key="value"
+          tag="li"
           clickable
-          @click="listLength = amount">
-          <q-item-section>{{ amount }} items</q-item-section>
+          @click="listLength = value">
+          <q-item-section>{{ value }} items</q-item-section>
         </q-item>
       </q-list>
     </q-btn-dropdown>
@@ -45,21 +48,24 @@
     <q-btn-dropdown
       :label="`Auto refresh: ${intervalDelay}s`"
       icon="autorenew"
-      padding="2px 6px"
+      padding="xs 6px"
       color="secondary"
       text-color="black"
-      :ripple="false"
       auto-close
       dense
       no-wrap
-      no-caps>
-      <q-list separator>
+      no-caps
+      :ripple="false">
+      <q-list
+        separator
+        dense>
         <q-item
-          v-for="number of [15, 30, 60]"
-          :key="number"
+          v-for="value of [15, 30, 60]"
+          :key="value"
+          tag="li"
           clickable
-          @click="intervalDelay = number">
-          <q-item-section>{{ number }} seconds</q-item-section>
+          @click="intervalDelay = value">
+          <q-item-section>{{ value }} seconds</q-item-section>
         </q-item>
       </q-list>
     </q-btn-dropdown>
@@ -67,22 +73,22 @@
     <q-btn
       label="Refresh"
       icon="refresh"
-      padding="2px 6px"
+      padding="xs sm"
       color="secondary"
       text-color="black"
       dense
       no-caps
+      no-wrap
       @click="updateNews(newsCategory, intervalDelay, listLength)" />
   </div>
 
   <q-list
     v-if="news"
-    class="q-ma-md"
     tag="ol">
     <StoryItem
       v-for="story of news"
-      :story="story"
-      :key="story.id" />
+      :key="story.id"
+      :story="story" />
   </q-list>
 </template>
 

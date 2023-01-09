@@ -19,27 +19,25 @@
         class="comment-text" />
 
       <template v-if="hasSubcomments">
-        <q-item-label>
-          <q-btn
-            :label="isExpanded ? 'Collapse' : 'Expand'"
-            :icon="isExpanded ? 'expand_less' : 'expand_more'"
-            :ripple="false"
-            size="12px"
-            padding="2px 10px 2px 6px"
-            rounded
-            unelevated
-            class="text-weight-bold"
-            color="primary"
-            glossy
-            no-caps
-            dense
-            @click="toggleSubcomments" />
-        </q-item-label>
+        <q-btn
+          :label="isExpanded ? 'Collapse' : 'Expand'"
+          :icon="isExpanded ? 'expand_less' : 'expand_more'"
+          :ripple="false"
+          class="self-start text-weight-bold q-mb-sm"
+          size="12px"
+          padding="2px 10px 2px 6px"
+          color="primary"
+          dense
+          glossy
+          rounded
+          unelevated
+          no-caps
+          no-wrap
+          @click="toggleSubcomments" />
 
         <q-list
           v-if="isExpanded"
           tag="ul"
-          class="q-gutter-y-xs"
           separator>
           <Suspense
             v-if="isExpansionInitiator"

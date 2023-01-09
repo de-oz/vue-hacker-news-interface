@@ -1,15 +1,15 @@
 <template>
   <template v-if="story">
-    <div class="q-ma-md">
+    <div>
       <h1 class="text-weight-bold q-mt-md text-h5">
         {{ story.title }}
       </h1>
 
-      <div class="q-my-sm">
+      <div class="q-my-sm q-gutter-x-sm">
         <q-btn
           :to="{ name: 'main' }"
-          icon="home"
           label="Back to Main"
+          icon="home"
           padding="xs md"
           color="primary"
           dense
@@ -20,10 +20,9 @@
         <q-btn
           :href="story.url"
           target="_blank"
-          icon="link"
           label="Go to URL"
+          icon="link"
           padding="xs md"
-          class="q-ml-sm"
           color="positive"
           dense
           rounded
@@ -31,66 +30,59 @@
           no-wrap />
       </div>
 
-      <q-chip color="secondary">
+      <q-chip
+        v-for="chip of [
+          { icon: 'thumb_up', label: `Score: ${story.score}` },
+          { icon: 'person', label: `Author: ${story.by}` },
+          {
+            icon: 'calendar_month',
+            label: `Date: ${dayjs
+              .unix(story.time)
+              .format('DD/MM/YYYY HH:mm')} (${dayjs
+              .unix(story.time)
+              .fromNow()})`,
+          },
+        ]"
+        :key="chip.icon"
+        color="secondary">
         <q-avatar
-          icon="thumb_up"
+          :icon="chip.icon"
           size="md"
           color="deep-orange"
           text-color="white" />
-        Score: {{ story.score }}
-      </q-chip>
-
-      <q-chip color="secondary">
-        <q-avatar
-          icon="person"
-          size="md"
-          color="deep-orange"
-          text-color="white" />
-        Author: {{ story.by }}
-      </q-chip>
-
-      <q-chip color="secondary">
-        <q-avatar
-          icon="calendar_month"
-          size="md"
-          color="deep-orange"
-          text-color="white" />
-        Date: {{ dayjs.unix(story.time).format('DD/MM/YYYY HH:mm') }} ({{
-          dayjs.unix(story.time).fromNow()
-        }})
+        {{ chip.label }}
       </q-chip>
     </div>
 
-    <q-separator spaced="sm" />
+    <q-separator spaced="md" />
 
     <div class="relative-position">
-      <q-toolbar class="q-pl-lg">
+      <q-toolbar>
         <q-toolbar-title
           class="text-h6"
           shrink>
           <q-icon
+            name="forum"
             color="primary"
-            size="sm"
-            name="forum" />
+            size="sm" />
           Comments: {{ story.descendants }}
         </q-toolbar-title>
 
         <q-btn
+          icon="refresh"
           color="deep-orange"
           round
           glossy
           no-caps
           dense
-          icon="refresh"
           @click="refresh" />
       </q-toolbar>
 
       <Suspense timeout="0">
         <q-list
+          :key="() => (commentsToggle = !commentsToggle)"
           tag="ul"
-          class="q-pl-sm q-gutter-y-xs"
-          separator
-          :key="() => (commentsToggle = !commentsToggle)">
+          separator>
           <CommentItem
             v-for="commentId of story.kids"
             :key="commentId"

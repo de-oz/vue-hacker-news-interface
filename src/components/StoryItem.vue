@@ -10,7 +10,7 @@
           posted by {{ story.by }} {{ dayjs.unix(story.time).fromNow() }}
         </q-item-label>
 
-        <div class="q-mt-xs q-gutter-x-sm q-gutter-y-xs">
+        <div class="q-mt-sm q-gutter-x-sm">
           <q-badge
             class="q-py-xs q-px-sm"
             color="red"
@@ -33,6 +33,7 @@
         </div>
       </q-item-section>
     </q-item>
+
     <q-separator spaced="sm" />
   </li>
 </template>
