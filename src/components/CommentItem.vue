@@ -112,7 +112,8 @@ if (comment.value.kids) {
 
 .comment-text {
   line-height: 1.25;
-  margin: 12px 0 8px;
+  padding: 12px 0 8px;
+  overflow-wrap: anywhere;
 }
 
 .author {

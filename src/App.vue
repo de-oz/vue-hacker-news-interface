@@ -37,4 +37,9 @@ div > p:last-child {
 .q-page {
   margin: 8px 32px;
 }
+
+pre {
+  white-space: pre-wrap;
+  margin-bottom: 16px;
+}
 </style>
