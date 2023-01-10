@@ -4,6 +4,17 @@
       <q-item-section>
         <q-item-label class="text-weight-bold text-subtitle1">
           {{ story.title }}
+          <q-btn
+            @click.stop
+            :href="story.url"
+            target="_blank"
+            icon="link"
+            class="q-ml-sm"
+            color="primary"
+            glossy
+            round
+            dense
+            :ripple="false" />
         </q-item-label>
 
         <q-item-label caption>
