@@ -107,12 +107,12 @@ if (comment.value.kids) {
   position: relative;
   background-color: transparent;
   font-size: 70px;
-  height: 83.5px;
+  height: 81.5px;
 }
 
 .comment-text {
   line-height: 1.25;
-  padding: 12px 0 8px;
+  padding: 12px 0;
   overflow-wrap: anywhere;
 }
 

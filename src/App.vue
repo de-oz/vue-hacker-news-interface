@@ -30,16 +30,16 @@ body {
   background-color: $info;
 }
 
-div > p:last-child {
-  margin: 0;
-}
-
 .q-page {
   margin: 8px 32px;
 }
 
+div > p {
+  margin: 8px 0 0 0;
+}
+
 pre {
   white-space: pre-wrap;
-  margin-bottom: 16px;
+  margin: 8px 0;
 }
 </style>
