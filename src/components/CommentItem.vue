@@ -23,9 +23,7 @@
           :label="isExpanded ? 'Collapse' : 'Expand'"
           :icon="isExpanded ? 'expand_less' : 'expand_more'"
           :ripple="false"
-          class="self-start text-weight-bold q-mb-sm"
-          size="12px"
-          padding="2px 10px 2px 6px"
+          class="expand-button"
           color="primary"
           dense
           glossy
@@ -107,13 +105,11 @@ if (comment.value.kids) {
   position: relative;
   background-color: transparent;
   font-size: 70px;
-  height: 81.5px;
+  height: 77.5px;
 }
 
-.comment-text {
-  line-height: 1.25;
-  padding: 12px 0;
-  overflow-wrap: anywhere;
+.q-item {
+  padding: 8px 0 0 12px;
 }
 
 .author {
@@ -121,7 +117,21 @@ if (comment.value.kids) {
   margin-left: 4px;
 }
 
-li {
-  padding: 8px 0 0 12px;
+.comment-text {
+  line-height: 1.25;
+  padding: 8px 12px 8px 36px;
+  overflow-wrap: anywhere;
+
+  &:last-child {
+    padding: 8px 12px 12px 36px;
+  }
+}
+
+.expand-button {
+  align-self: flex-start;
+  padding: 2px 10px 2px 6px;
+  margin: 0 0 8px 36px;
+  font-size: 12px;
+  font-weight: bold;
 }
 </style>
