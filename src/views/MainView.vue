@@ -4,7 +4,9 @@
       v-model="newsCategory"
       size="15px"
       padding="6px lg"
-      toggle-color="accent"
+      toggle-color="positive"
+      color="orange-1"
+      text-color="black"
       spread
       rounded
       glossy
@@ -19,13 +21,10 @@
       ]" />
   </div>
 
-  <div class="q-my-md q-gutter-x-md">
+  <div class="btn-group q-my-md q-gutter-x-md">
     <q-btn-dropdown
       :label="`Show: ${listLength}`"
       icon="list"
-      padding="xs 6px"
-      color="secondary"
-      text-color="black"
       auto-close
       dense
       no-wrap
@@ -48,9 +47,6 @@
     <q-btn-dropdown
       :label="`Auto refresh: ${intervalDelay}s`"
       icon="autorenew"
-      padding="xs 6px"
-      color="secondary"
-      text-color="black"
       auto-close
       dense
       no-wrap
@@ -73,9 +69,6 @@
     <q-btn
       label="Refresh"
       icon="refresh"
-      padding="xs sm"
-      color="secondary"
-      text-color="black"
       dense
       no-caps
       no-wrap
@@ -123,8 +116,11 @@ onUnmounted(() => {
 </script>
 
 <style lang="scss">
+.btn-group .q-btn,
 .q-menu .q-item {
+  color: #000;
   background-color: $secondary;
-  min-height: unset;
+  text-align: center;
+  padding: 4px 8px;
 }
 </style>

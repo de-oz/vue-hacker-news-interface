@@ -2,7 +2,7 @@
   <li v-if="isValid">
     <q-item :to="{ name: 'story', params: { id: story.id } }">
       <q-item-section>
-        <q-item-label class="text-weight-bold text-subtitle1">
+        <q-item-label class="q-mb-xs text-weight-bold text-subtitle1">
           {{ story.title }}
           <q-btn
             @click.stop
@@ -10,7 +10,8 @@
             target="_blank"
             icon="link"
             class="q-ml-sm"
-            color="primary"
+            color="accent"
+            size="12px"
             glossy
             round
             dense

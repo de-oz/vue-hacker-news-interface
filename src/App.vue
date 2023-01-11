@@ -5,15 +5,24 @@
       elevated
       bordered>
       <q-toolbar class="glossy">
-        <q-avatar
-          class="shadow-3"
-          rounded>
+        <q-avatar rounded>
           <img
             src="./assets/Y_Combinator_logo.svg"
             alt="Y Combinator Logo" />
         </q-avatar>
 
         <q-toolbar-title class="text-h5">Hacker News Interface</q-toolbar-title>
+
+        <div>
+          <q-toggle
+            v-model="theme"
+            class="q-mr-sm"
+            checked-icon="dark_mode"
+            unchecked-icon="sunny"
+            label="Theme"
+            size="45px"
+            color="dark" />
+        </div>
       </q-toolbar>
     </q-header>
 
@@ -25,13 +34,31 @@
   </q-layout>
 </template>
 
+<script setup>
+import { ref, watchEffect } from 'vue';
+import { useQuasar, setCssVar } from 'quasar';
+
+const $q = useQuasar();
+const theme = ref(true);
+
+watchEffect(() => {
+  $q.dark.set(theme.value);
+  const color = theme.value ? '#FF5733' : '#283350';
+  setCssVar('accent', color);
+});
+</script>
+
 <style lang="scss">
+* {
+  transition: background-color 0.3s;
+}
+
 body {
-  background-color: $info;
+  background-color: #f8eee7;
 }
 
 .q-page {
-  margin: 8px 32px;
+  margin: 12px 32px;
 }
 
 div > p {

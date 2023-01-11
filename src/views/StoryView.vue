@@ -23,7 +23,7 @@
           label="Go to URL"
           icon="link"
           padding="xs md"
-          color="positive"
+          color="deep-orange"
           dense
           rounded
           no-caps
@@ -44,11 +44,12 @@
           },
         ]"
         :key="chip.icon"
+        text-color="black"
         color="secondary">
         <q-avatar
           :icon="chip.icon"
           size="md"
-          color="deep-orange"
+          color="red-13"
           text-color="white" />
         {{ chip.label }}
       </q-chip>
@@ -63,14 +64,14 @@
           shrink>
           <q-icon
             name="forum"
-            color="primary"
+            color="accent"
             size="sm" />
           Comments: {{ story.descendants }}
         </q-toolbar-title>
 
         <q-btn
           icon="refresh"
-          color="deep-orange"
+          color="light-blue-14"
           round
           glossy
           no-caps
@@ -92,7 +93,7 @@
 
         <template #fallback>
           <q-inner-loading :showing="true">
-            <q-spinner-tail color="positive" />
+            <q-spinner-tail color="warning" />
           </q-inner-loading>
         </template>
       </Suspense>
@@ -137,18 +138,14 @@ watchEffect(() => (story.value ? $q.loading.hide() : $q.loading.show()));
 .q-inner-loading {
   background-color: transparent;
   font-size: 100px;
-  height: 300px;
+  height: 350px;
 }
 
 ul {
   padding: 0;
 }
 
-li {
-  padding: 8px 12px 0px;
-
-  &:first-of-type {
-    padding-top: 0;
-  }
+.q-chip {
+  margin: 8px 6px 8px 4px;
 }
 </style>

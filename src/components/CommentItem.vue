@@ -3,15 +3,13 @@
     v-if="isValid"
     tag="li">
     <q-item-section>
-      <q-item-label>
+      <q-item-label class="text-italic">
         <q-icon
-          color="primary"
+          color="accent"
           size="md"
           name="account_circle" />
-        <span class="text-italic">
-          <span class="author">{{ comment.by }}</span>
-          {{ dayjs.unix(comment.time).fromNow() }}
-        </span>
+        <span class="author">{{ comment.by }}</span>
+        {{ dayjs.unix(comment.time).fromNow() }}
       </q-item-label>
 
       <div
@@ -24,7 +22,7 @@
           :icon="isExpanded ? 'expand_less' : 'expand_more'"
           :ripple="false"
           class="expand-button"
-          color="primary"
+          color="accent"
           dense
           glossy
           rounded
@@ -47,7 +45,7 @@
 
             <template #fallback>
               <q-inner-loading :showing="true">
-                <q-spinner-gears color="positive" />
+                <q-spinner-gears color="warning" />
               </q-inner-loading>
             </template>
           </Suspense>
@@ -104,22 +102,26 @@ if (comment.value.kids) {
 .q-inner-loading {
   position: relative;
   background-color: transparent;
-  font-size: 70px;
-  height: 77.5px;
+  font-size: 55px;
+  height: 73.5px;
 }
 
 .q-item {
-  padding: 8px 0 0 12px;
+  padding: 12px 0 0 12px;
+}
+
+.q-btn ~ .q-list > .q-item:first-child {
+  padding-top: 4px;
 }
 
 .author {
   font-weight: bold;
-  margin-left: 4px;
+  margin-left: 6px;
 }
 
 .comment-text {
   line-height: 1.25;
-  padding: 8px 12px 8px 36px;
+  padding: 8px 12px 8px 38px;
   overflow-wrap: anywhere;
 
   &:last-child {
@@ -130,8 +132,13 @@ if (comment.value.kids) {
 .expand-button {
   align-self: flex-start;
   padding: 2px 10px 2px 6px;
-  margin: 0 0 8px 36px;
+  margin: 0 0 12px 38px;
   font-size: 12px;
   font-weight: bold;
+}
+
+i {
+  background-color: #f8eee7;
+  border-radius: 50%;
 }
 </style>

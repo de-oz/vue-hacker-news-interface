@@ -24,7 +24,7 @@ app.use(Quasar, {
   config: {
     loading: {
       spinner: QSpinnerGears,
-      spinnerColor: 'accent',
+      spinnerColor: 'warning',
       spinnerSize: '120',
       messageColor: 'primary',
       backgroundColor: 'secondary',
