@@ -12,7 +12,7 @@
 
         <div>
           <q-toggle
-            v-model="theme"
+            v-model="darkTheme"
             label="Theme"
             checked-icon="dark_mode"
             unchecked-icon="light_mode"
@@ -35,12 +35,13 @@ import { ref, watchEffect } from 'vue';
 import { useQuasar, setCssVar } from 'quasar';
 
 const $q = useQuasar();
-const theme = ref(false);
+const darkTheme = ref(JSON.parse(localStorage.getItem('darkTheme')) || false);
 
 watchEffect(() => {
-  $q.dark.set(theme.value);
-  const color = theme.value ? '#FF5733' : '#283350';
+  $q.dark.set(darkTheme.value);
+  const color = darkTheme.value ? '#FF5733' : '#283350';
   setCssVar('accent', color);
+  localStorage.setItem('darkTheme', darkTheme.value);
 });
 </script>
 

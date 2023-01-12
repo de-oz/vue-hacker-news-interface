@@ -1,7 +1,7 @@
 <template>
   <div class="row justify-center">
     <q-btn-toggle
-      v-model="newsCategory"
+      v-model="category"
       size="15px"
       padding="6px lg"
       toggle-color="positive"
@@ -72,7 +72,7 @@
       dense
       no-caps
       no-wrap
-      @click="updateNews(newsCategory, intervalDelay, listLength)" />
+      @click="refresh" />
   </div>
 
   <q-list
@@ -93,26 +93,24 @@ import { useNewsStore } from '../stores/useNewsStore.js';
 import StoryItem from '../components/StoryItem.vue';
 
 const store = useNewsStore();
-const { news, intervalId, isLoading } = storeToRefs(store);
+const { news, category, listLength, intervalDelay, intervalId } =
+  storeToRefs(store);
 const { updateNews } = store;
 
-const newsCategory = ref('top');
-const intervalDelay = ref(30);
-const listLength = ref(50);
+const isLoading = ref(false);
 
-watchEffect(() =>
-  updateNews(newsCategory.value, intervalDelay.value, listLength.value)
-);
+watchEffect(() => updateNews(isLoading));
+
+onUnmounted(() => clearInterval(intervalId.value));
 
 const $q = useQuasar();
 $q.loading.setDefaults({ message: 'Updating the news list...' });
 
 watchEffect(() => (isLoading.value ? $q.loading.show() : $q.loading.hide()));
 
-onUnmounted(() => {
-  news.value = null;
-  clearInterval(intervalId.value);
-});
+function refresh() {
+  updateNews(isLoading);
+}
 </script>
 
 <style lang="scss">

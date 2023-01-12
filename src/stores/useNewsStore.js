@@ -2,21 +2,30 @@ import { defineStore } from 'pinia';
 import { ref } from 'vue';
 import { useGetNews } from '../composables/useGetNews';
 
-export const useNewsStore = defineStore('news', () => {
+export const useNewsStore = defineStore('newsData', () => {
   const news = ref(null);
+  const category = ref('top');
+  const listLength = ref(50);
+  const intervalDelay = ref(30);
   const intervalId = ref(null);
-  const isLoading = ref(false);
 
-  function updateNews(newsCategory, intervalDelay, listLength) {
-    useGetNews(news, newsCategory, listLength, isLoading);
+  function updateNews(isLoading) {
+    useGetNews(news, category.value, listLength.value, isLoading);
 
     clearInterval(intervalId.value);
 
     intervalId.value = setInterval(
-      () => useGetNews(news, newsCategory, listLength, isLoading),
-      intervalDelay * 1000
+      () => useGetNews(news, category.value, listLength.value, isLoading),
+      intervalDelay.value * 1000
     );
   }
 
-  return { news, intervalId, isLoading, updateNews };
+  return {
+    news,
+    category,
+    listLength,
+    intervalDelay,
+    intervalId,
+    updateNews,
+  };
 });

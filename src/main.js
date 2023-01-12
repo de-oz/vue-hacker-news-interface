@@ -1,4 +1,4 @@
-import { createApp } from 'vue';
+import { createApp, watch } from 'vue';
 import { createPinia } from 'pinia';
 import { Quasar, Loading, QSpinnerGears } from 'quasar';
 
@@ -14,9 +14,22 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 dayjs.extend(relativeTime);
 
 const app = createApp(App);
+const pinia = createPinia();
+
+if (localStorage.getItem('state')) {
+  pinia.state.value = JSON.parse(localStorage.getItem('state'));
+}
+
+watch(
+  pinia.state,
+  (state) => {
+    localStorage.setItem('state', JSON.stringify(state));
+  },
+  { deep: true }
+);
 
 app.use(router);
-app.use(createPinia());
+app.use(pinia);
 app.use(Quasar, {
   plugins: {
     Loading,
