@@ -39,7 +39,7 @@ import { ref, watchEffect } from 'vue';
 import { useQuasar, setCssVar } from 'quasar';
 
 const $q = useQuasar();
-const theme = ref(true);
+const theme = ref(false);
 
 watchEffect(() => {
   $q.dark.set(theme.value);
@@ -68,5 +68,27 @@ div > p {
 pre {
   white-space: pre-wrap;
   margin: 8px 0;
+}
+
+.loading {
+  [class*='spinner'] {
+    color: $warning;
+    width: 100px;
+    height: 100px;
+  }
+
+  [class*='backdrop'] {
+    background-color: $info;
+  }
+
+  [class*='message'] {
+    font-weight: bold;
+    font-style: italic;
+    margin-top: 20px;
+  }
+}
+
+.body--light [class*='message'] {
+  color: $primary;
 }
 </style>

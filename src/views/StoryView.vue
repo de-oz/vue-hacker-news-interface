@@ -93,7 +93,9 @@
 
         <template #fallback>
           <q-inner-loading :showing="true">
-            <q-spinner-tail color="warning" />
+            <q-spinner-tail
+              size="100px"
+              color="warning" />
           </q-inner-loading>
         </template>
       </Suspense>
@@ -137,8 +139,7 @@ watchEffect(() => (story.value ? $q.loading.hide() : $q.loading.show()));
 <style lang="scss" scoped>
 .q-inner-loading {
   background-color: transparent;
-  font-size: 100px;
-  height: 350px;
+  height: 300px;
 }
 
 ul {
