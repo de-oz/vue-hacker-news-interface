@@ -1,7 +1,7 @@
 <template>
   <template v-if="story">
     <div>
-      <h1 class="text-weight-bold q-mt-md text-h5">
+      <h1 class="text-weight-bold q-mt-md text-h6">
         {{ story.title }}
       </h1>
 
@@ -11,7 +11,7 @@
           label="Back to Main"
           icon="home"
           padding="xs md"
-          color="primary"
+          color="accent"
           dense
           rounded
           no-caps
@@ -23,7 +23,7 @@
           label="Go to URL"
           icon="link"
           padding="xs md"
-          color="deep-orange"
+          color="teal"
           dense
           rounded
           no-caps
@@ -49,7 +49,7 @@
         <q-avatar
           :icon="chip.icon"
           size="md"
-          color="red-13"
+          color="red-7"
           text-color="white" />
         {{ chip.label }}
       </q-chip>
@@ -60,7 +60,7 @@
     <div class="relative-position">
       <q-toolbar>
         <q-toolbar-title
-          class="text-h6"
+          style="font-size: 18px"
           shrink>
           <q-icon
             name="forum"
@@ -71,7 +71,7 @@
 
         <q-btn
           icon="refresh"
-          color="light-blue-14"
+          color="light-blue-8"
           round
           glossy
           no-caps

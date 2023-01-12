@@ -111,7 +111,7 @@ if (comment.value.kids) {
 }
 
 .q-btn ~ .q-list > .q-item:first-child {
-  padding-top: 4px;
+  padding-top: 0;
 }
 
 .author {

@@ -1,9 +1,6 @@
 <template>
   <q-layout view="lHh lpr lFf">
-    <q-header
-      reveal
-      elevated
-      bordered>
+    <q-header reveal>
       <q-toolbar class="glossy">
         <q-avatar rounded>
           <img
@@ -11,15 +8,14 @@
             alt="Y Combinator Logo" />
         </q-avatar>
 
-        <q-toolbar-title class="text-h5">Hacker News Interface</q-toolbar-title>
+        <q-toolbar-title class="text-h6">Hacker News Interface</q-toolbar-title>
 
         <div>
           <q-toggle
             v-model="theme"
-            class="q-mr-sm"
-            checked-icon="dark_mode"
-            unchecked-icon="sunny"
             label="Theme"
+            checked-icon="dark_mode"
+            unchecked-icon="light_mode"
             size="45px"
             color="dark" />
         </div>
@@ -72,9 +68,9 @@ pre {
 
 .loading {
   [class*='spinner'] {
-    color: $warning;
     width: 100px;
     height: 100px;
+    color: $warning;
   }
 
   [class*='backdrop'] {
