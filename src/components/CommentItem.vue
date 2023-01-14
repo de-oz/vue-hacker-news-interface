@@ -102,16 +102,12 @@ if (comment.value.kids) {
 .q-inner-loading {
   position: relative;
   background-color: transparent;
-  font-size: 55px;
-  height: 73.5px;
+  font-size: 50px;
+  height: 69.5px;
 }
 
 .q-item {
-  padding: 12px 0 0 12px;
-}
-
-.q-btn ~ .q-list > .q-item:first-child {
-  padding-top: 0;
+  padding: 12px 0 0 0;
 }
 
 .author {
@@ -125,7 +121,11 @@ if (comment.value.kids) {
   overflow-wrap: anywhere;
 
   &:last-child {
-    padding: 8px 12px 12px 36px;
+    padding: 8px 12px 12px 38px;
+  }
+
+  :deep(p) {
+    margin: 8px 0 0 0;
   }
 }
 
@@ -135,6 +135,10 @@ if (comment.value.kids) {
   margin: 0 0 12px 38px;
   font-size: 12px;
   font-weight: bold;
+}
+
+.q-btn + .q-list > .q-item:first-child {
+  padding-top: 0;
 }
 
 i {

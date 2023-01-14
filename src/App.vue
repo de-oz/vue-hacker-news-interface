@@ -1,7 +1,9 @@
 <template>
   <q-layout view="lHh lpr lFf">
-    <q-header reveal>
-      <q-toolbar class="glossy">
+    <q-header
+      class="glossy"
+      reveal>
+      <q-toolbar>
         <q-avatar rounded>
           <img
             src="./assets/Y_Combinator_logo.svg"
@@ -13,7 +15,8 @@
         <div>
           <q-toggle
             v-model="darkTheme"
-            label="Theme"
+            :label="$q.screen.gt.xs && 'Theme'"
+            :dense="$q.screen.lt.sm"
             checked-icon="dark_mode"
             unchecked-icon="light_mode"
             size="45px"
@@ -54,12 +57,14 @@ body {
   background-color: #f8eee7;
 }
 
-.q-page {
-  margin: 12px 32px;
+#app,
+.q-toolbar {
+  max-width: 1440px;
+  margin: 0 auto;
 }
 
-div > p {
-  margin: 8px 0 0 0;
+.q-page {
+  margin: 12px 32px;
 }
 
 pre {
@@ -79,7 +84,6 @@ pre {
   }
 
   [class*='message'] {
-    font-weight: bold;
     font-style: italic;
     margin-top: 20px;
   }
@@ -87,5 +91,11 @@ pre {
 
 .body--light [class*='message'] {
   color: $primary;
+}
+
+@media (max-width: 600px) {
+  .q-page {
+    margin: 12px;
+  }
 }
 </style>

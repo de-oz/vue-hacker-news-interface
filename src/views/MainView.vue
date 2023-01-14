@@ -2,8 +2,7 @@
   <div class="row justify-center">
     <q-btn-toggle
       v-model="category"
-      size="15px"
-      padding="6px lg"
+      :padding="$q.screen.gt.xs ? '6px lg' : 'xs md'"
       toggle-color="positive"
       color="orange-1"
       text-color="black"
@@ -21,7 +20,7 @@
       ]" />
   </div>
 
-  <div class="btn-group q-my-md q-gutter-x-md">
+  <div class="settings">
     <q-btn-dropdown
       :label="`Show: ${listLength}`"
       icon="list"
@@ -67,12 +66,13 @@
     </q-btn-dropdown>
 
     <q-btn
-      label="Refresh"
       icon="refresh"
       dense
       no-caps
       no-wrap
-      @click="refresh" />
+      @click="refresh">
+      <span class="gt-xs q-ml-xs">Refresh</span>
+    </q-btn>
   </div>
 
   <q-list
@@ -114,11 +114,53 @@ function refresh() {
 </script>
 
 <style lang="scss">
-.btn-group .q-btn,
+.settings {
+  margin: 16px 0;
+
+  .q-btn:not(:first-child) {
+    margin-left: 16px;
+  }
+}
+
+.settings .q-btn,
 .q-menu .q-item {
   color: #000;
   background-color: $secondary;
   text-align: center;
   padding: 4px 8px;
+}
+
+@media (max-width: 600px) {
+  ol {
+    padding-left: 25px;
+
+    .q-item {
+      padding: 8px;
+    }
+  }
+
+  .settings {
+    display: flex;
+    justify-content: center;
+
+    .q-btn {
+      padding: 2px 4px;
+      font-size: 13px;
+
+      &:not(:first-child) {
+        margin-left: 8px;
+      }
+    }
+  }
+}
+
+@media (max-width: 450px) {
+  .settings .q-btn {
+    font-size: 12px;
+
+    &:not(:first-child) {
+      margin-left: 4px;
+    }
+  }
 }
 </style>

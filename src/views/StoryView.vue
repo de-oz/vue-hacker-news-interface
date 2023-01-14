@@ -1,64 +1,60 @@
 <template>
   <template v-if="story">
-    <div>
-      <h1 class="text-weight-bold q-mt-md text-h6">
-        {{ story.title }}
-      </h1>
+    <h1 class="text-weight-bold q-mt-md text-h6">
+      {{ story.title }}
+    </h1>
 
-      <div class="q-my-sm q-gutter-x-sm">
-        <q-btn
-          :to="{ name: 'main' }"
-          label="Back to Main"
-          icon="home"
-          padding="xs md"
-          color="accent"
-          dense
-          rounded
-          no-caps
-          no-wrap />
+    <div class="btn-group">
+      <q-btn
+        :to="{ name: 'main' }"
+        label="Back to Main"
+        icon="home"
+        padding="xs md"
+        color="accent"
+        dense
+        rounded
+        no-caps
+        no-wrap />
 
-        <q-btn
-          :href="story.url"
-          target="_blank"
-          label="Go to URL"
-          icon="link"
-          padding="xs md"
-          color="teal"
-          dense
-          rounded
-          no-caps
-          no-wrap />
-      </div>
-
-      <q-chip
-        v-for="chip of [
-          { icon: 'thumb_up', label: `Score: ${story.score}` },
-          { icon: 'person', label: `Author: ${story.by}` },
-          {
-            icon: 'calendar_month',
-            label: `Date: ${dayjs
-              .unix(story.time)
-              .format('DD/MM/YYYY HH:mm')} (${dayjs
-              .unix(story.time)
-              .fromNow()})`,
-          },
-        ]"
-        :key="chip.icon"
-        text-color="black"
-        color="secondary">
-        <q-avatar
-          :icon="chip.icon"
-          size="md"
-          color="red-7"
-          text-color="white" />
-        {{ chip.label }}
-      </q-chip>
+      <q-btn
+        :href="story.url"
+        target="_blank"
+        label="Go to URL"
+        icon="link"
+        padding="xs md"
+        color="teal"
+        dense
+        rounded
+        no-caps
+        no-wrap />
     </div>
+
+    <q-chip
+      v-for="chip of [
+        { icon: 'thumb_up', label: `Score: ${story.score}` },
+        { icon: 'person', label: `Author: ${story.by}` },
+        {
+          icon: 'calendar_month',
+          label: `Date: ${dayjs
+            .unix(story.time)
+            .format('DD/MM/YYYY HH:mm')} (${dayjs.unix(story.time).fromNow()})`,
+        },
+      ]"
+      :key="chip.icon"
+      text-color="black"
+      color="secondary">
+      <q-avatar
+        :icon="chip.icon"
+        size="md"
+        color="red-7"
+        text-color="white" />
+      {{ chip.label }}
+    </q-chip>
 
     <q-separator spaced="md" />
 
     <div class="relative-position">
-      <q-toolbar>
+      <q-toolbar class="justify-center">
         <q-toolbar-title
           style="font-size: 18px"
           shrink>
@@ -146,7 +142,8 @@ ul {
   padding: 0;
 }
 
+.btn-group .q-btn,
 .q-chip {
-  margin: 8px 6px 8px 4px;
+  margin: 8px 8px 8px 0px;
 }
 </style>
