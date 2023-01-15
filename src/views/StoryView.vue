@@ -100,8 +100,7 @@
 </template>
 
 <script setup>
-import { ref, watchEffect, inject } from 'vue';
-import { useQuasar } from 'quasar';
+import { ref, inject } from 'vue';
 import CommentItem from '../components/CommentItem.vue';
 import { useGetStory } from '../composables/useGetStory.js';
 import { useNewsStore } from '../stores/useNewsStore.js';
@@ -113,23 +112,12 @@ const props = defineProps({
 });
 
 const { news } = useNewsStore();
-const story = ref(null);
+const story = ref(news.find((item) => item.id === props.id));
 let commentsToggle = false;
-
-if (news) {
-  story.value = news.find((item) => item.id === props.id);
-} else {
-  useGetStory(props.id, story);
-}
 
 function refresh() {
   useGetStory(props.id, story);
 }
-
-const $q = useQuasar();
-$q.loading.setDefaults({ message: 'Loading the story...' });
-
-watchEffect(() => (story.value ? $q.loading.hide() : $q.loading.show()));
 </script>
 
 <style lang="scss" scoped>
