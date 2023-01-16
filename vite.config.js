@@ -5,6 +5,7 @@ import vue from '@vitejs/plugin-vue';
 import { quasar, transformAssetUrls } from '@quasar/vite-plugin';
 
 export default defineConfig({
+  base: '/vue-hacker-news-interface/',
   plugins: [
     vue({
       template: { transformAssetUrls },

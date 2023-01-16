@@ -6,7 +6,7 @@
       <q-toolbar>
         <q-avatar rounded>
           <img
-            src="./assets/Y_Combinator_logo.svg"
+            src="./assets/logo.png"
             alt="Y Combinator Logo" />
         </q-avatar>
 
