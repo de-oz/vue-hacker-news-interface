@@ -42,8 +42,15 @@ const darkTheme = ref(JSON.parse(localStorage.getItem('darkTheme')) || false);
 
 watchEffect(() => {
   $q.dark.set(darkTheme.value);
-  const color = darkTheme.value ? '#FF5733' : '#283350';
-  setCssVar('accent', color);
+
+  if (darkTheme.value) {
+    document.documentElement.classList.add('dark');
+    setCssVar('accent', '#FF5733');
+  } else {
+    document.documentElement.classList.remove('dark');
+    setCssVar('accent', '#283350');
+  }
+
   localStorage.setItem('darkTheme', darkTheme.value);
 });
 </script>
@@ -55,6 +62,10 @@ watchEffect(() => {
 
 body {
   background-color: #f8eee7;
+}
+
+.dark {
+  color-scheme: dark;
 }
 
 #app,
