@@ -6,12 +6,14 @@ import { useNewsStore } from '../stores/useNewsStore';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
+
   routes: [
     {
       path: '/',
       name: 'main',
       component: MainView,
     },
+
     {
       path: '/storyid=:id(\\d+)',
       name: 'story',
@@ -30,12 +32,17 @@ const router = createRouter({
           };
       },
     },
+
     {
       path: '/:pathMatch(.*)*',
       name: '404',
       component: NotFound,
     },
   ],
+
+  scrollBehavior(to, from, savedPosition) {
+    return to.name === 'main' ? savedPosition : { top: 0 };
+  },
 });
 
 export default router;
