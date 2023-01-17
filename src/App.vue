@@ -106,7 +106,7 @@ pre {
 
 @media (max-width: 600px) {
   .q-page {
-    margin: 12px;
+    margin: 8px;
   }
 }
 </style>

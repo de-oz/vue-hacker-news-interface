@@ -25,13 +25,10 @@
       :label="`Show: ${listLength}`"
       icon="list"
       auto-close
-      dense
       no-wrap
       no-caps
       :ripple="false">
-      <q-list
-        separator
-        dense>
+      <q-list separator>
         <q-item
           v-for="value of [25, 50, 100]"
           :key="value"
@@ -47,13 +44,10 @@
       :label="`Auto refresh: ${intervalDelay}s`"
       icon="autorenew"
       auto-close
-      dense
       no-wrap
       no-caps
       :ripple="false">
-      <q-list
-        separator
-        dense>
+      <q-list separator>
         <q-item
           v-for="value of [15, 30, 60]"
           :key="value"
@@ -67,7 +61,6 @@
 
     <q-btn
       icon="refresh"
-      dense
       no-caps
       no-wrap
       @click="refresh">
@@ -120,14 +113,23 @@ function refresh() {
   .q-btn:not(:first-child) {
     margin-left: 16px;
   }
+
+  .q-icon:first-child:not(:only-of-type) {
+    margin-right: 6px;
+  }
+
+  .q-icon:last-child {
+    margin-left: 6px;
+  }
 }
 
 .settings .q-btn,
 .q-menu .q-item {
-  color: #000;
-  background-color: $secondary;
+  min-height: 0;
+  padding: 4px 6px;
   text-align: center;
-  padding: 4px 8px;
+  color: $dark;
+  background-color: $secondary;
 }
 
 @media (max-width: 600px) {
@@ -143,24 +145,26 @@ function refresh() {
     display: flex;
     justify-content: center;
 
-    .q-btn {
-      padding: 2px 4px;
-      font-size: 13px;
-
-      &:not(:first-child) {
-        margin-left: 8px;
-      }
+    .q-btn:not(:first-child) {
+      margin-left: 8px;
     }
+  }
+
+  .settings .q-btn,
+  .q-menu .q-item {
+    padding: 4px 4px;
+    font-size: 13px;
   }
 }
 
-@media (max-width: 450px) {
-  .settings .q-btn {
-    font-size: 12px;
+@media (max-width: 400px) {
+  .settings .q-btn:not(:first-child) {
+    margin-left: 4px;
+  }
 
-    &:not(:first-child) {
-      margin-left: 4px;
-    }
+  .settings .q-btn,
+  .q-menu .q-item {
+    font-size: 12px;
   }
 }
 </style>
