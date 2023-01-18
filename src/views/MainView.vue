@@ -2,7 +2,7 @@
   <div class="row justify-center">
     <q-btn-toggle
       v-model="category"
-      :padding="$q.screen.gt.xs ? '6px lg' : 'xs md'"
+      :padding="$q.screen.gt.xs ? '6px lg' : '6px md'"
       toggle-color="positive"
       color="orange-1"
       text-color="black"
@@ -97,7 +97,6 @@ watchEffect(() => updateNews(isLoading));
 onUnmounted(() => clearInterval(intervalId.value));
 
 const $q = useQuasar();
-$q.loading.setDefaults({ message: 'Updating the news list...' });
 
 watchEffect(() => (isLoading.value ? $q.loading.show() : $q.loading.hide()));
 

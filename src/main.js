@@ -37,6 +37,7 @@ app.use(Quasar, {
   config: {
     loading: {
       spinner: QSpinnerGears,
+      message: 'Loading the news list...',
       customClass: 'loading',
     },
   },

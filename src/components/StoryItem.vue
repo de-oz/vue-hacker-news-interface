@@ -4,23 +4,26 @@
       class="block"
       :to="{ name: 'story', params: { id: story.id } }">
       <q-item-section>
-        <q-item-label class="q-mb-xs text-weight-bold text-subtitle1">
+        <q-item-label
+          class="row no-wrap items-center q-mb-xs text-weight-bold text-subtitle1">
           {{ story.title }}
           <q-btn
             @click.stop
             :href="story.url"
             target="_blank"
             icon="link"
-            class="q-ml-sm"
-            color="accent"
+            class="on-right"
             size="12px"
+            color="accent"
             glossy
             round
             dense
             :ripple="false" />
         </q-item-label>
 
-        <q-item-label caption>
+        <q-item-label
+          class="no-margin"
+          caption>
           posted by {{ story.by }} {{ dayjs.unix(story.time).fromNow() }}
         </q-item-label>
 

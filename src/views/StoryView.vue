@@ -41,6 +41,7 @@
         },
       ]"
       :key="chip.icon"
+      :ripple="false"
       text-color="black"
       color="secondary">
       <q-avatar
