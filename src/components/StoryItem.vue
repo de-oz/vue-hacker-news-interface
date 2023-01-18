@@ -1,6 +1,8 @@
 <template>
   <li v-if="isValid">
-    <q-item :to="{ name: 'story', params: { id: story.id } }">
+    <q-item
+      class="block"
+      :to="{ name: 'story', params: { id: story.id } }">
       <q-item-section>
         <q-item-label class="q-mb-xs text-weight-bold text-subtitle1">
           {{ story.title }}
