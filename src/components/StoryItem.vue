@@ -12,7 +12,7 @@
             :href="story.url"
             target="_blank"
             icon="link"
-            class="on-right"
+            class="q-ml-sm"
             size="12px"
             color="accent"
             glossy

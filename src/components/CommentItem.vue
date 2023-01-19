@@ -6,7 +6,7 @@
       <q-item-label class="text-italic">
         <q-icon
           color="accent"
-          size="md"
+          :size="$q.screen.gt.xs ? 'md' : 'sm'"
           name="account_circle" />
         <span class="author">{{ comment.by }}</span>
         {{ dayjs.unix(comment.time).fromNow() }}
@@ -106,6 +106,10 @@ if (comment.value.kids) {
   height: 69.5px;
 }
 
+.q-list {
+  padding-left: clamp(16px, 4vw, 40px);
+}
+
 .q-item {
   padding: 12px 0 0 0;
 }
@@ -116,12 +120,13 @@ if (comment.value.kids) {
 }
 
 .comment-text {
+  padding: 8px 12px 8px 4px;
   line-height: 1.25;
-  padding: 8px 12px 8px 38px;
+  font-size: 13px;
   overflow-wrap: anywhere;
 
   &:last-child {
-    padding: 8px 12px 12px 38px;
+    padding: 8px 12px 12px 4px;
   }
 
   :deep(p) {
@@ -132,8 +137,8 @@ if (comment.value.kids) {
 .expand-button {
   align-self: flex-start;
   padding: 2px 10px 2px 6px;
-  margin: 0 0 12px 38px;
-  font-size: 12px;
+  margin: 0 0 12px 4px;
+  font-size: 11px;
   font-weight: bold;
 }
 
