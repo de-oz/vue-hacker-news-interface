@@ -1,6 +1,6 @@
 <template>
   <template v-if="story">
-    <h1 class="text-weight-bold q-mt-md text-h6">
+    <h1 class="text-weight-bold text-h6">
       {{ story.title }}
     </h1>
 
@@ -78,8 +78,9 @@
 
       <Suspense timeout="0">
         <q-list
-          :key="() => (commentsToggle = !commentsToggle)"
+          :key="(commentsToggle = !commentsToggle)"
           tag="ul"
+          class="no-padding"
           separator>
           <CommentItem
             v-for="commentId of story.kids"
@@ -127,12 +128,11 @@ function refresh() {
   height: 300px;
 }
 
-ul {
-  padding: 0;
+.btn-group .q-btn {
+  margin: 8px 8px 8px 0;
 }
 
-.btn-group .q-btn,
 .q-chip {
-  margin: 8px 8px 8px 0px;
+  margin: 8px 8px 8px 2px;
 }
 </style>

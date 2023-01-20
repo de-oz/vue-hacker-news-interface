@@ -106,11 +106,15 @@ function refresh() {
 </script>
 
 <style lang="scss">
+ol {
+  padding-left: clamp(24px, 4vw, 40px);
+}
+
 .settings {
   margin: 16px 0;
 
   .q-btn:not(:first-child) {
-    margin-left: 16px;
+    margin-left: clamp(4px, 1.5vw, 16px);
   }
 
   .q-icon:first-child:not(:only-of-type) {
@@ -124,46 +128,22 @@ function refresh() {
 
 .settings .q-btn,
 .q-menu .q-item {
-  min-height: 0;
-  padding: 4px 6px;
+  font-size: clamp(12px, 8px + 1vw, 14px);
+  padding: 4px clamp(4px, -2px + 1vw, 6px);
   text-align: center;
+  min-height: 0;
   color: $dark;
   background-color: $secondary;
 }
 
 @media (max-width: 600px) {
-  ol {
-    padding-left: 25px;
-
-    .q-item {
-      padding: 8px;
-    }
+  ol .q-item {
+    padding: 8px;
   }
 
   .settings {
     display: flex;
     justify-content: center;
-
-    .q-btn:not(:first-child) {
-      margin-left: 8px;
-    }
-  }
-
-  .settings .q-btn,
-  .q-menu .q-item {
-    padding: 4px 4px;
-    font-size: 13px;
-  }
-}
-
-@media (max-width: 400px) {
-  .settings .q-btn:not(:first-child) {
-    margin-left: 4px;
-  }
-
-  .settings .q-btn,
-  .q-menu .q-item {
-    font-size: 12px;
   }
 }
 </style>

@@ -64,10 +64,6 @@ body {
   background-color: #f8eee7;
 }
 
-.dark {
-  color-scheme: dark;
-}
-
 #app,
 .q-toolbar {
   max-width: 1440px;
@@ -75,12 +71,16 @@ body {
 }
 
 .q-page {
-  margin: 12px 32px;
+  margin: 12px clamp(8px, -40px + 8vw, 36px);
 }
 
 pre {
   white-space: pre-wrap;
   margin: 8px 0;
+}
+
+.dark {
+  color-scheme: dark;
 }
 
 .loading {
@@ -96,17 +96,12 @@ pre {
 
   [class*='message'] {
     font-style: italic;
+    font-weight: bold;
     margin-top: 20px;
   }
 }
 
 .body--light [class*='message'] {
   color: $primary;
-}
-
-@media (max-width: 600px) {
-  .q-page {
-    margin: 8px;
-  }
 }
 </style>
