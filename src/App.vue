@@ -62,6 +62,12 @@ watchEffect(() => {
 
 body {
   background-color: #f8eee7;
+  width: 100vw !important;
+  overflow-x: hidden;
+}
+
+header {
+  width: 100vw;
 }
 
 #app,
@@ -71,7 +77,7 @@ body {
 }
 
 .q-page {
-  margin: 12px clamp(8px, -40px + 8vw, 36px);
+  padding: 16px clamp(8px, -40px + 8vw, 36px) 24px;
 }
 
 pre {
