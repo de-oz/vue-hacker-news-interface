@@ -34,7 +34,7 @@
 </template>
 
 <script setup>
-import { ref, watchEffect } from 'vue';
+import { ref, watchEffect, onMounted } from 'vue';
 import { useQuasar, setCssVar } from 'quasar';
 
 const $q = useQuasar();
@@ -53,17 +53,17 @@ watchEffect(() => {
 
   localStorage.setItem('darkTheme', darkTheme.value);
 });
+
+onMounted(() => {
+  document.body.classList.add('transition');
+});
 </script>
 
 <style lang="scss">
-* {
-  transition: background-color 0.3s;
-}
-
 body {
-  background-color: #f8eee7;
   width: 100vw !important;
   overflow-x: hidden;
+  background-color: #f8eee7;
 }
 
 header {
@@ -87,6 +87,27 @@ pre {
 
 .dark {
   color-scheme: dark;
+}
+
+.transition {
+  transition: color 0.3s, background-color 0.3s;
+}
+
+.q-btn {
+  transition: background-color 0.3s;
+}
+
+.q-icon {
+  transition: color 0.1s;
+}
+
+main .q-list--dark,
+main .q-item--dark {
+  color: inherit;
+}
+
+.q-list .q-item {
+  transition: initial;
 }
 
 .loading {
